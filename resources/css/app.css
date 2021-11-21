@@ -1,0 +1,23 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.multiselect {
+    border-width: 1px !important;
+    border-radius: 0.5rem !important;
+    --tw-border-opacity: 1;
+    border-color: rgba(209, 213, 219, var(--tw-border-opacity)) !important;
+    --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.multiselect-search {
+    @apply focus:ring-0;
+}
+
+.multiselect .multiselect-search {
+    border-radius: 0.5rem !important;
+}
+.multiselect-spacer {
+    height: 42px !important;
+}
