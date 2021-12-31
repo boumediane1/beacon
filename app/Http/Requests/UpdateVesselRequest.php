@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreBarqueRequest extends FormRequest
+class UpdateVesselRequest extends FormRequest
 {
     protected $stopOnFirstFailure = true;
 
@@ -27,11 +28,12 @@ class StoreBarqueRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3'],
-            'registration_number' => ['required', 'min:3', 'unique:barques'],
+            'registration_number' => ['required', 'min:3', Rule::unique('vessels')->ignore($this->vessel->id)],
             'beacon_id' => ['required'],
             'activity_id' => ['required'],
             'city_id' => ['required'],
-            'port_id' => ['required']
+            'port_id' => ['required'],
+            'mmsi' => ['nullable', 'size:9']
         ];
     }
 }

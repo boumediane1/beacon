@@ -27,13 +27,13 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="secondary-phone-number" value="Secondary phone number" />
+                        <Label for="secondary-phone-number">Secondary phone number <span class="text-gray-500">(optional)</span></Label>
                         <Input id="secondary-phone-number" type="text" v-model="form.secondary_phone_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-1" :message="errors.secondary_phone_number" />
                     </div>
 
                     <div class="col-span-6">
-                        <Label for="address" value="Address" />
+                        <Label for="address">Address <span class="text-gray-500">(optional)</span></Label>
                         <Textarea id="address" v-model="form.address" class="mt-1 py-2.5 block w-full" />
                         <InputError class="mt-1" :message="errors.address" />
                     </div>

@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(10)->create();
+//         \App\Models\User::factory(10)->create();
         $this->call([
             CitySeeder::class,
             PortSeeder::class,
@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::class,
             ModelSeeder::class,
             ManufacturerSeeder::class,
-            BeaconSeeder::class
+            StatusSeeder::class
         ]);
     }
 }

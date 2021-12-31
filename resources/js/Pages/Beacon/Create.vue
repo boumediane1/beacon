@@ -14,9 +14,15 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="serial-number" value="Serial number"></Label>
-                        <Input id="serial-number" type="text" v-model="form.serial_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
-                        <InputError class="mt-2" :message="errors.serial_number" />
+                        <Label for="serial-number" value="S/N Manufacturer"></Label>
+                        <Input id="serial-number" type="text" v-model="form.serial_number_manufacturer" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-2" :message="errors.serial_number_manufacturer" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="serial-number-sar">S/N SAR <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="serial-number-sar" type="text" v-model="form.serial_number_sar" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-2" :message="errors.serial_number_sar" />
                     </div>
 
                     <div class="col-span-3">
@@ -52,13 +58,16 @@
                         <select :disabled="filteredModels.length === 0" id="model" v-model="form.model_id" :class="{'cursor-not-allowed': filteredModels.length === 0}" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="model in filteredModels" :key="model.id" :value="model.id" v-text="model.name"></option>
                         </select>
+                        <InputError class="mt-2" :message="errors.model_id" />
                     </div>
 
-                    <div class="col-span-6">
-                        <div class="flex items-center gap-4">
-                            <Switch :status="form.status" v-model="form.status" />
-                            <Label value="Status" />
-                        </div>
+                    <div class="col-span-3">
+<!--                            <Switch :status="form.status" v-model="form.status" />-->
+                        <Label for="status" value="Status" />
+                        <select v-model="form.status_id" id="status" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.name }}</option>
+                        </select>
+                        <InputError class="mt-2" :message="errors.status_id" />
                     </div>
 
                 </template>
@@ -101,7 +110,8 @@ export default {
         manufacturers: Array,
         types: Array,
         models: Array,
-        errors: Object
+        errors: Object,
+        statuses: Array
     },
 
     data () {
@@ -109,13 +119,14 @@ export default {
             filteredModels: this.models,
             form: {
                 uin: '',
-                serial_number: '',
+                serial_number_manufacturer: '',
+                serial_number_sar: '',
                 registration_date: '',
                 expiration_date: '',
                 manufacturer_id: 1,
                 type_id: 1,
                 model_id: 1,
-                status: true
+                status_id: 1
             }
         }
     },
@@ -127,9 +138,17 @@ export default {
     },
 
     watch: {
-        'form.type_id': function () {
+        'form.type_id': function (value) {
             this.filteredModels = this.models.filter(model => model.type_id === this.form.type_id);
+            this.form.model_id = '';
+        },
+        'type': function () {
+
         }
-    }
+    },
+
+    // created () {
+    //     this.filteredModels = this.models.filter(model => model.type_id === this.form.type_id);
+    // }
 }
 </script>

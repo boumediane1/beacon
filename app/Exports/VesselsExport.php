@@ -6,7 +6,7 @@ use App\Models\Port;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class BarquesExport implements WithMultipleSheets
+class VesselsExport implements WithMultipleSheets
 {
     use Exportable;
 
@@ -14,7 +14,7 @@ class BarquesExport implements WithMultipleSheets
         $sheets = [];
         $ports = Port::query()->orderBy('name')->get();
         foreach ($ports as $port) {
-            $sheets[] = new BarquesPerPortSheet($port);
+            $sheets[] = new VesselsPerPortSheet($port);
         }
 
         return $sheets;

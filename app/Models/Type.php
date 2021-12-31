@@ -9,5 +9,8 @@ class Type extends Model
 {
     use HasFactory;
 
+    public function models () {
+        return $this->hasMany(\App\Models\Model::class);
+    }
 
 }

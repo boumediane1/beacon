@@ -16,6 +16,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z" />
                         </svg>
+<!--                        <img class="h-6" src="images/logo.svg" alt="">-->
                     </div>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
@@ -76,7 +77,7 @@ export default {
     data () {
         return {
             navigation: [
-                { name: 'Barques', href: route('barques.index'), current: route().current('barques.index') || route().current('barques.create') || route().current('barques.edit') },
+                { name: 'Vessels', href: route('vessels.index'), current: route().current('vessels.index') || route().current('vessels.create') || route().current('vessels.edit') },
                 { name: 'Beacons', href: route('beacons.index'), current: route().current('beacons.index') || route().current('beacons.create') || route().current('beacons.edit') },
                 { name: 'Owners', href: route('users.index'), current: route().current('users.index') || route().current('users.create') || route().current('users.edit') },
             ]

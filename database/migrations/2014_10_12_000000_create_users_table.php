@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->boolean('is_admin')->default(false);
-            $table->string('phone_number');
+            $table->integer('is_admin')->default(0);
+            $table->string('phone_number')->nullable();
             $table->string('secondary_phone_number')->nullable();
             $table->string('address')->nullable();
             $table->rememberToken();
@@ -29,10 +29,14 @@ class CreateUsersTable extends Migration
 
         \App\Models\User::create([
             'name' => 'admin',
-            'email' => 'hanafi.khalid@gmail.com',
             'password' => \Illuminate\Support\Facades\Hash::make('admin'),
-            'is_admin' => true,
-            'phone_number' => '+212661384792'
+            'is_admin' => 1
+        ]);
+
+        \App\Models\User::create([
+            'name' => 'staff',
+            'password' => \Illuminate\Support\Facades\Hash::make('staff'),
+            'is_admin' => 2
         ]);
     }
 

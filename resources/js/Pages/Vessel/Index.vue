@@ -11,7 +11,7 @@
                     <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Owner, port, UIN" autocomplete="off">
                 </div>
                 <div class="flex gap-2">
-                    <a :href="route('barques.export')">
+                    <a :href="route('vessels.export')">
                         <div class="px-4 py-3 sm:py-2.5 text-white bg-green-500 hover:bg-green-400 rounded-lg shadow">
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </a>
-                    <Link :href="route('barques.create')">
+                    <Link v-if="can.create" :href="route('vessels.create')">
                         <div class="px-4 py-3 sm:py-2.5 text-white bg-blue-500 hover:bg-blue-400 rounded-lg shadow">
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -40,17 +40,20 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-600">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
-                                        Barque
+                                    <th scope="col" class="w-1/4 px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
+                                        Vessel
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider whitespace-nowrap">
-                                        Port
+                                        Site
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         Owner
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         UIN
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
+                                        MMSI
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         Activity
@@ -61,46 +64,54 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="barque in barques.data" :key="barque.id">
+                                <tr v-for="vessel in vessels.data" :key="vessel.id">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <img src="/ship.svg" alt="Ship">
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    {{ barque.name }}
+                                                    {{ vessel.name }}
                                                 </div>
-                                                <div class="text-sm text-gray-500">
-                                                    {{ barque.registration_number }}
+                                                <div>
+                                                    <span title="Registration number" class="text-sm text-gray-500">
+                                                    {{ vessel.registration_number }}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ barque.port.city.name }}</div>
-                                        <div class="text-sm text-gray-500">{{ barque.port.name }}</div>
+                                        <div class="text-sm text-gray-900">{{ vessel.port.city.name }}</div>
+                                        <div class="text-sm text-gray-500">{{ vessel.port.name }}</div>
                                     </td>
-                                    <td v-if="barque.user" class="px-6 py-4 whitespace-nowrap">
-                                        <Link :href="route('users.index', {id: barque.user.id})" class="text-sm text-gray-900 hover:text-indigo-600">{{ barque.user.name }}</Link>
+                                    <td v-if="vessel.user" class="px-6 py-4 whitespace-nowrap">
+                                        <Link :href="route('users.index', {id: vessel.user.id})" class="text-sm text-gray-900 hover:text-indigo-600">{{ vessel.user.name }}</Link>
                                     </td>
                                     <td v-else class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         Undefined
                                     </td>
-
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        <Link :href="route('beacons.index', {id: barque.beacon.id})" class="text-sm text-gray-900 hover:text-indigo-600">{{ barque.beacon.uin }}</Link>
+                                        <Link :href="route('beacons.index', {id: vessel.beacon.id})" class="text-sm text-gray-900 hover:text-indigo-600">{{ vessel.beacon.uin }}</Link>
+                                    </td>
+                                    <td v-if="vessel.mmsi" class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ vessel.mmsi }}
+                                    </td>
+                                    <td v-else class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        Undefined
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ barque.activity.name }}
+                                        {{ vessel.activity.name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <Link :href="route('barques.edit', barque.id)" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
+                                        <a :href="route('vessels.show', vessel.id)" target="_blank" class="text-indigo-600 hover:text-indigo-900">View</a>
+                                        <Link v-if="can.update" :href="route('vessels.edit', vessel.id)" class="ml-4 text-indigo-600 hover:text-indigo-900">Edit</Link>
                                     </td>
                                 </tr>
-                                <tr v-if="barques.data.length === 0">
+                                <tr v-if="vessels.data.length === 0">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         No results found.
                                     </td>
-                                    <td v-for="i in 5" :key="i"></td>
+                                    <td v-for="i in 6" :key="i"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -108,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            <Pagination class="mt-4" :links="barques.links" />
+            <Pagination class="mt-4" :links="vessels.links" />
         </div>
     </AppLayout>
 </template>
@@ -124,7 +135,8 @@ export default {
     },
 
     props: {
-        barques: Object
+        vessels: Object,
+        can: Array
     },
 
     data () {
@@ -135,7 +147,7 @@ export default {
 
     methods: {
         search () {
-            this.$inertia.get(this.route('barques.index'), {search: this.term}, {preserveState: true})
+            this.$inertia.get(this.route('vessels.index'), {search: this.term}, {preserveState: true})
         }
     }
 }

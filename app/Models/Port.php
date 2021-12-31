@@ -13,7 +13,7 @@ class Port extends Model
         return $this->belongsTo(City::class);
     }
 
-    public function barques () {
-        return $this->hasMany(Barque::class);
+    public function vessels () {
+        return $this->hasMany(Vessel::class);
     }
 }

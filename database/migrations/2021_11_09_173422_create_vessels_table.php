@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarquesTable extends Migration
+class CreateVesselsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBarquesTable extends Migration
      */
     public function up()
     {
-        Schema::create('barques', function (Blueprint $table) {
+        Schema::create('vessels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('registration_number');
@@ -21,6 +21,7 @@ class CreateBarquesTable extends Migration
             $table->foreignId('beacon_id')->constrained()->cascadeOnDelete();
             $table->foreignId('port_id')->constrained()->cascadeOnDelete();
             $table->foreignId('activity_id')->constrained()->cascadeOnDelete();
+            $table->string('mmsi')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateBarquesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barques');
+        Schema::dropIfExists('vessels');
     }
 }

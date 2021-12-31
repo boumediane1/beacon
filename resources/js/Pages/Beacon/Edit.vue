@@ -20,6 +20,12 @@
                     </div>
 
                     <div class="col-span-3">
+                        <Label for="serial-number-sar">SAR S/N <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="serial-number-sar" type="text" v-model="form.serial_number_sar" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-2" :message="errors.serial_number_sar" />
+                    </div>
+
+                    <div class="col-span-3">
                         <Label for="registration-date" value="Registration date" />
                         <Input id="registration-date" type="date" v-model="form.registration_date" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.registration_date" />
@@ -54,11 +60,11 @@
                         </select>
                     </div>
 
-                    <div class="col-span-6">
-                        <div class="flex items-center gap-4">
-                            <Switch :status="form.status" v-model="form.status" />
-                            <Label value="Status" />
-                        </div>
+                    <div class="col-span-3">
+                        <Label for="status" value="Status" />
+                        <select v-model="form.status_id" id="status" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.name }}</option>
+                        </select>
                     </div>
 
                 </template>
@@ -102,7 +108,8 @@ export default {
         manufacturers: Array,
         types: Array,
         models: Array,
-        errors: Object
+        errors: Object,
+        statuses: Array
     },
 
     data () {
@@ -111,12 +118,13 @@ export default {
             form: {
                 uin: this.beacon.uin,
                 serial_number: this.beacon.serial_number,
+                serial_number_sar: this.beacon.serial_number_sar,
                 registration_date: this.beacon.registration_date,
                 expiration_date: this.beacon.expiration_date,
                 manufacturer_id: this.beacon.manufacturer_id,
                 type_id: this.beacon.model.type_id,
                 model_id: this.beacon.model_id,
-                status: this.beacon.status
+                status_id: this.beacon.status_id
             }
         }
     },

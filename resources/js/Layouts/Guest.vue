@@ -1,20 +1,27 @@
 <template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-indigo-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z" />
-            </svg>
-            <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
-                Sign in to your account
-            </h2>
-        </div>
-
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
-                <slot />
+    <div class="flex items-center min-h-screen bg-gray-100">
+        <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
+            <div class="flex flex-col md:flex-row">
+                <div class="hidden  h-32 md:h-auto md:w-1/2 md:flex items-center bg-gray-200">
+                    <img class="object-cover w-56 mx-auto" src="images/plb.png"
+                         alt="img" />
+                </div>
+                <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+                    <div class="w-full">
+                        <div class="flex justify-center">
+                            <img src="images/logo.svg" alt="">
+                        </div>
+                        <h1 class="my-4 text-2xl font-bold text-center text-gray-700 capitalize">
+<!--                            Outil de traçabilité des PLB-->
+                            Beacons tracking tool
+                        </h1>
+                        <slot></slot>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>

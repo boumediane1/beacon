@@ -11,7 +11,7 @@
                     <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Owner" autocomplete="off">
                 </div>
                 <div>
-                    <Link :href="route('users.create')">
+                    <Link v-if="can.create" :href="route('users.create')">
                         <div class="px-4 py-3 sm:py-2.5 text-white bg-blue-500 hover:bg-blue-400 rounded-lg shadow">
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,17 +68,17 @@
                                         <div class="text-sm text-gray-500">{{ user.secondary_phone_number }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ user.address }}
+                                        {{ user.address ?? 'Undefined' }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <Link :href="route('users.edit', user.id)" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
+                                        <Link v-if="can.update" :href="route('users.edit', user.id)" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
                                     </td>
                                 </tr>
                                 <tr v-if="users.data.length === 0">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         No results found.
                                     </td>
-                                    <td v-for="i in 5" :key="i"></td>
+                                    <td v-for="i in 3" :key="i"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -104,7 +104,8 @@ export default {
     },
 
     props: {
-        users: Object
+        users: Object,
+        can: Array
     },
 
     data () {

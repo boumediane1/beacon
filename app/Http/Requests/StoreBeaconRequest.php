@@ -26,14 +26,15 @@ class StoreBeaconRequest extends FormRequest
     public function rules()
     {
         return [
-            'uin' => ['size:15', 'unique:beacons'],
-            'serial_number' => ['digits:10', 'unique:beacons'],
+            'uin' => ['required', 'size:15', 'unique:beacons'],
+            'serial_number_manufacturer' => ['required', 'digits:10', 'unique:beacons'],
+            'serial_number_sar' => ['unique:beacons'],
             'registration_date' => ['required'],
             'expiration_date' => ['required'],
             'manufacturer_id' => ['required'],
             'type_id' => ['required'],
             'model_id' => ['required'],
-            'status' => ['required']
+            'status_id' => ['required']
         ];
     }
 

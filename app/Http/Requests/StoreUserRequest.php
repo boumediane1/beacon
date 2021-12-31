@@ -27,9 +27,9 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'unique:users'],
-            'email' => ['nullable', 'email', 'unique:users'],
-            'phone_number' => ['required', 'unique:users'],
-            'secondary_phone_number' => ['nullable', 'unique:users'],
+            'email' => ['required', 'email', 'unique:users'],
+            'phone_number' => ['required', 'unique:users', 'digits:10'],
+            'secondary_phone_number' => ['nullable', 'unique:users', 'digits:10'],
             'address' => ['nullable', 'min:3', 'max:80']
         ];
     }

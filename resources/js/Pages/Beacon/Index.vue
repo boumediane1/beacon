@@ -11,7 +11,7 @@
                     <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="UIN or serial number" autocomplete="off">
                 </div>
                 <div>
-                    <Link :href="route('beacons.create')">
+                    <Link v-if="can.create" :href="route('beacons.create')">
                         <div class="px-4 py-3 sm:py-2.5 text-white bg-blue-500 hover:bg-blue-400 rounded-lg shadow">
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -40,7 +40,7 @@
                                         Usage
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
-                                        Company
+                                        S/N SAR
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         Status
@@ -80,19 +80,19 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ beacon.manufacturer.name }}
+                                        <td v-if="beacon.serial_number_sar" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ beacon.serial_number_sar }}
+                                        </td>
+                                        <td v-else class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Undefined
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span v-if="beacon.status === 1" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-lime-100 text-lime-800">
-                                                Active
-                                            </span>
-                                            <span v-else class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-pink-100 text-pink-800">
-                                                Inactive
+                                            <span :class="[beacon.status.id === 1 ? 'text-lime-800 bg-lime-100' : 'text-pink-800 bg-pink-100']" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                                                {{ beacon.status.name }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <Link :href="route('beacons.edit', beacon.id)" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
+                                            <Link v-if="can.update" :href="route('beacons.edit', beacon.id)" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
                                         </td>
                                     </tr>
                                     <tr v-if="beacons.data.length === 0">
@@ -125,7 +125,8 @@ export default {
     },
 
     props: {
-        beacons: Object
+        beacons: Object,
+        can: Array
     },
 
     data () {

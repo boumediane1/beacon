@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Barque;
+use App\Models\Vessel;
 use App\Models\Port;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -15,7 +15,7 @@ use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class BarquesPerPortSheet implements FromQuery, WithTitle, WithMapping, WithHeadings, WithStyles
+class VesselsPerPortSheet implements FromQuery, WithTitle, WithMapping, WithHeadings, WithStyles
 {
     private $port;
 
@@ -24,47 +24,50 @@ class BarquesPerPortSheet implements FromQuery, WithTitle, WithMapping, WithHead
     }
 
     public function query() {
-        return Barque::query()->where('port_id', $this->port->id);
+        return Vessel::query()
+            ->where('port_id', $this->port->id);
     }
 
     public function title(): string {
         return $this->port->name;
     }
 
-    public function map($barque): array {
+    public function map($vessel): array {
         return [
-            $barque->name,
-            $barque->registration_number,
-            $barque->activity->name,
+            $vessel->name,
+            $vessel->registration_number,
+            $vessel->activity->name,
 
-            $barque->beacon->uin,
-            $barque->beacon->serial_number,
-            $barque->beacon->model->type->name,
-            $barque->beacon->model->name,
-            $barque->beacon->registration_date,
-            $barque->beacon->expiration_date,
-            $barque->beacon->manufacturer->name,
-            $barque->beacon->status ? 'Active' : 'Inactive',
+            $vessel->beacon->uin,
+            $vessel->beacon->serial_number_manufacturer,
+            $vessel->beacon->serial_number_sar,
+            $vessel->beacon->model->type->name,
+            $vessel->beacon->model->name,
+            $vessel->beacon->registration_date,
+            $vessel->beacon->expiration_date,
+            $vessel->beacon->manufacturer->name,
+            $vessel->beacon->status ? 'Active' : 'Inactive',
 
-            $barque->user ? $barque->user->name : '',
-            $barque->user ? $barque->user->email : '',
-            $barque->user ? $barque->user->phone_number : '',
-            $barque->user ? $barque->user->secondary_phone_number : '',
-            $barque->user ? $barque->user->address : ''
+            $vessel->user ? $vessel->user->name : '',
+            $vessel->user ? $vessel->user->email : '',
+            $vessel->user ? $vessel->user->phone_number : '',
+            $vessel->user ? $vessel->user->secondary_phone_number : '',
+            $vessel->user ? $vessel->user->address : ''
         ];
     }
 
     public function headings(): array {
         return [
-            'Barque',
+            'Vessel',
             'Registration number',
             'Activity',
             'UIN',
-            'Serial number',
+            'S/N manufacturer',
+            'S/N SAR',
             'Type',
             'Model',
             'Registration date',
-            'Expiration date',
+            'Battery expiration date',
             'Company',
             'Status',
             'Owner',
