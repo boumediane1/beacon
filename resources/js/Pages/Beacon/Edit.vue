@@ -14,8 +14,8 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="serial-number" value="Serial number"></Label>
-                        <Input id="serial-number" type="text" v-model="form.serial_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <Label for="serial-number-manufacturer" value="S/N Manufacturer"></Label>
+                        <Input id="serial-number-manufacturer" type="text" v-model="form.serial_number_manufacturer" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.serial_number" />
                     </div>
 
@@ -117,7 +117,7 @@ export default {
             filteredModels: this.models,
             form: {
                 uin: this.beacon.uin,
-                serial_number: this.beacon.serial_number,
+                serial_number_manufacturer: this.beacon.serial_number_manufacturer,
                 serial_number_sar: this.beacon.serial_number_sar,
                 registration_date: this.beacon.registration_date,
                 expiration_date: this.beacon.expiration_date,

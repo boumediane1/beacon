@@ -22996,7 +22996,7 @@ __webpack_require__.r(__webpack_exports__);
       filteredModels: this.models,
       form: {
         uin: this.beacon.uin,
-        serial_number: this.beacon.serial_number,
+        serial_number_manufacturer: this.beacon.serial_number_manufacturer,
         serial_number_sar: this.beacon.serial_number_sar,
         registration_date: this.beacon.registration_date,
         expiration_date: this.beacon.expiration_date,
@@ -25779,14 +25779,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Label, {
-            "for": "serial-number",
-            value: "Serial number"
+            "for": "serial-number-manufacturer",
+            value: "S/N Manufacturer"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Input, {
-            id: "serial-number",
+            id: "serial-number-manufacturer",
             type: "text",
-            modelValue: $data.form.serial_number,
+            modelValue: $data.form.serial_number_manufacturer,
             "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-              return $data.form.serial_number = $event;
+              return $data.form.serial_number_manufacturer = $event;
             }),
             "class": "mt-1 py-2.5 block w-full",
             autocomplete: "off"
@@ -26209,7 +26209,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: beacon.id
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<i class=\"fas fa-satellite text-gray-600 text-lg\"></i>"), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<img class=\"h-10 w-10 rounded-full\" src=\"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60\" alt=\"\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(beacon.uin), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(beacon.serial_number), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(beacon.serial_number_manufacturer), 1
         /* TEXT */
         )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(beacon.model.type.name), 1
         /* TEXT */

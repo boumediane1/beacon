@@ -64,7 +64,7 @@
                                                         {{ beacon.uin }}
                                                     </div>
                                                     <div class="text-sm text-gray-500">
-                                                        {{ beacon.serial_number }}
+                                                        {{ beacon.serial_number_manufacturer }}
                                                     </div>
                                                 </div>
                                             </div>
