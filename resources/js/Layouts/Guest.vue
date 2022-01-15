@@ -9,7 +9,7 @@
                 <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
                     <div class="w-full">
                         <div class="flex justify-center">
-                            <img src="images/logo.svg" alt="">
+                            <img class="w-24" src="images/logo.jpg" alt="">
                         </div>
                         <h1 class="my-4 text-2xl font-bold text-center text-gray-700 capitalize">
 <!--                            Outil de traçabilité des PLB-->

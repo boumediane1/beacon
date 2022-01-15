@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Exports\VesselsExport;
 use App\Http\Requests\StoreVesselRequest;
 use App\Http\Requests\UpdateVesselRequest;
+use App\Imports\VesselImport;
+use App\Imports\UsersImport;
 use App\Imports\BeaconImport;
 use App\Models\Activity;
 use App\Models\Vessel;
@@ -28,7 +30,8 @@ class VesselController extends Controller
         $vessels = Vessel::query()
             ->with('user', 'beacon', 'port.city', 'activity')
             ->when($request->input('search'), function (Builder $query, $search) {
-                $query->whereRelation('user', 'name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%' . $search . '%');
+                $query->orWhereRelation('user', 'name', 'like', '%' . $search . '%');
                 $query->orWhereRelation('port', 'name', 'like', '%'. $search . '%');
                 $query->orWhereRelation('beacon', 'uin', 'like', '%' . $search . '%');
             })
@@ -37,9 +40,9 @@ class VesselController extends Controller
         return Inertia::render('Vessel/Index', [
             'vessels' => $vessels,
             'can' => [
-                'create' => Auth::user()->is_admin === 1,
-                'update' => Auth::user()->is_admin === 1,
-                'delete' => Auth::user()->is_admin === 1
+                'create' => Auth::user()->role === 1,
+                'update' => Auth::user()->role === 1,
+                'delete' => Auth::user()->role === 1
             ]
         ]);
     }
@@ -54,7 +57,7 @@ class VesselController extends Controller
         Gate::authorize('create', Vessel::class);
         $users = User::query()
             //->doesntHave('vessels')
-            ->where('is_admin', 0)
+            ->where('role', 3)
             ->get();
         $beacons = Beacon::query()
             //->doesntHave('vessels')
@@ -85,7 +88,7 @@ class VesselController extends Controller
         $ports = Port::all();
         $activities = Activity::all();
         $users = User::query()
-            ->where('is_admin', 0)
+            ->where('role', 3)
             ->get();
         $beacons = Beacon::all();
         return Inertia::render('Vessel/Edit', [
@@ -112,5 +115,15 @@ class VesselController extends Controller
 
     public function export () {
         return Excel::download(new VesselsExport(), 'vessels.xlsx');
+    }
+
+    public function import (Request $request) {
+//        $request->validate([
+//            'file' => 'mimes:application/vnd.ms-excel'
+//        ]);
+        Excel::import(new UsersImport(), $request->file('file'));
+        Excel::import(new BeaconImport(), $request->file('file'));
+        Excel::import(new VesselImport(), $request->file('file'));
+        return 'Done!';
     }
 }

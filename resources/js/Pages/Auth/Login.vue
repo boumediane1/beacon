@@ -10,7 +10,7 @@
     <form @submit.prevent="submit">
         <div>
             <BreezeLabel for="username" value="Username" />
-            <BreezeInput id="username" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="off" />
+            <BreezeInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" required autofocus autocomplete="off" />
         </div>
 
         <div class="mt-6">
@@ -65,7 +65,7 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                name: '',
+                username: '',
                 password: '',
                 remember: false
             })

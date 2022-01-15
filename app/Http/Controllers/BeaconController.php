@@ -24,8 +24,7 @@ class BeaconController extends Controller
         $beacons = Beacon::query()
             ->with('model.type', 'manufacturer', 'status')
             ->when($request->input('search'), function (Builder $query, $search) {
-                $query->where('uin', 'like', '%' . $search . '%');
-                $query->orWhere('serial_number', 'like', '%' . $search . '%');
+                $query->where('serial_number_sar', 'like', '%' . $search . '%');
             })
             ->when($request->input('id'), function (Builder $query, $search) {
                 return $query->where('id', $search);
@@ -35,9 +34,9 @@ class BeaconController extends Controller
         return Inertia::render('Beacon/Index', [
             'beacons' => $beacons,
             'can' => [
-                'create' => Auth::user()->is_admin === 1,
-                'update' => Auth::user()->is_admin === 1,
-                'delete' => Auth::user()->is_admin === 1
+                'create' => Auth::user()->role === 1,
+                'update' => Auth::user()->role === 1,
+                'delete' => Auth::user()->role === 1
             ]
         ]);
     }

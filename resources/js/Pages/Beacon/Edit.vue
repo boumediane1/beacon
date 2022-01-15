@@ -67,6 +67,12 @@
                         </select>
                     </div>
 
+                    <div class="col-span-3">
+                        <Label for="tac">TAC <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="tac" type="text" v-model="form.tac" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-2" :message="errors.tac" />
+                    </div>
+
                 </template>
 
                 <template #actions>
@@ -124,7 +130,8 @@ export default {
                 manufacturer_id: this.beacon.manufacturer_id,
                 type_id: this.beacon.model.type_id,
                 model_id: this.beacon.model_id,
-                status_id: this.beacon.status_id
+                status_id: this.beacon.status_id,
+                tac: this.beacon.tac
             }
         }
     },

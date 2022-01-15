@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index (Request $request) {
 
         $users = User::query()
-            ->where('is_admin', 0)
+            ->where('role', 3)
             ->when($request->input('search'), function (Builder $query, $search) {
                 return $query->where('name', 'like', '%' . $search . '%');
             })
@@ -27,12 +27,13 @@ class UserController extends Controller
             ->latest()
             ->paginate(5)
             ->withQueryString();
+
         return Inertia::render('User/Index', [
             'users' => $users,
             'can' => [
-                'create' => Auth::user()->is_admin === 1,
-                'update' => Auth::user()->is_admin === 1,
-                'delete' => Auth::user()->is_admin === 1
+                'create' => Auth::user()->role === 1,
+                'update' => Auth::user()->role === 1,
+                'delete' => Auth::user()->role === 1
             ]
         ]);
     }

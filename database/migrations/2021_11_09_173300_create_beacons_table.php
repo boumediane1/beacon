@@ -20,6 +20,7 @@ class CreateBeaconsTable extends Migration
             $table->string('serial_number_sar')->nullable();
             $table->date('registration_date');
             $table->date('expiration_date');
+            $table->string('tac')->nullable();
             $table->foreignId('status_id')->constrained()->cascadeOnDelete();
             $table->foreignId('manufacturer_id')->constrained()->cascadeOnDelete();
             $table->foreignId('model_id')->constrained()->cascadeOnDelete();

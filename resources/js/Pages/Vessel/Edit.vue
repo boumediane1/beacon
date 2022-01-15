@@ -8,7 +8,7 @@
                 </template>
                 <template #form>
                     <div class="col-span-3">
-                        <Label for="vessel" value="Vessel"></Label>
+                        <Label for="vessel" value="Unit name"></Label>
                         <Input id="vessel" type="text" v-model="form.name" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.name" />
                     </div>
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="uin" value="Beacon" />
+                        <Label for="uin" value="Beacon Hex ID" />
                         <div class="mt-1">
                             <Multiselect
                                 v-model="form.beacon_id"
@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="activity" value="Activity"></Label>
+                        <Label for="activity" value="Activity type"></Label>
                         <select v-model="form.activity_id" id="activity" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="activity in activities" :key="activity.id" :value="activity.id" v-text="activity.name"></option>
                         </select>
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="port" value="Port"></Label>
+                        <Label for="port" value="Port of registration"></Label>
                         <select :disabled="!form.city_id" v-model="form.port_id" id="port" :class="{'cursor-not-allowed': !form.city_id}" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="port in ports" :key="port.id" :value="port.id" v-text="port.name"></option>
                         </select>

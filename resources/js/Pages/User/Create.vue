@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="email" value="Email"></Label>
+                        <Label for="email">Email <span class="text-gray-500">(optional)</span></Label>
                         <Input id="email" type="text" v-model="form.email" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-1" :message="errors.email" />
 
@@ -38,11 +38,33 @@
                         <InputError class="mt-1" :message="errors.address" />
                     </div>
 
+                    <div class="col-span-3">
+                        <Label for="name">Emergency contact name <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="name" type="text" v-model="form.emergency_contact_name" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-1" :message="errors.emergency_contact_name" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="name">Emergency contact phone number <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="name" type="text" v-model="form.emergency_contact_phone_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-1" :message="errors.emergency_contact_phone_number" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="name">Secondary emergency contact name <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="name" type="text" v-model="form.secondary_emergency_contact_name" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-1" :message="errors.secondary_emergency_contact_name" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="name">Secondary emergency contact phone number <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="name" type="text" v-model="form.secondary_emergency_contact_phone_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-1" :message="errors.secondary_emergency_contact_phone_number" />
+                    </div>
 
                 </template>
 
                 <template #actions>
-                    <!--<button @click.prevent="destroy" class="text-red-600 hover:underline">Delete barque</button>-->
                     <Button class="ml-auto">Save</Button>
                 </template>
             </FormSection>
@@ -68,7 +90,6 @@ export default {
         Input,
         Label,
         AppLayout,
-        Listbox,
         Multiselect,
         FormSection,
         InputError
@@ -85,7 +106,11 @@ export default {
                 email: '',
                 phone_number: '',
                 secondary_phone_number: '',
-                address: ''
+                address: '',
+                emergency_contact_name: '',
+                emergency_contact_phone_number: '',
+                secondary_emergency_contact_name: '',
+                secondary_emergency_contact_phone_number: ''
             }
         }
     },

@@ -8,15 +8,29 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Owner, port, UIN" autocomplete="off">
+                    <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Owner, Unit name or S/N sar" autocomplete="off">
                 </div>
                 <div class="flex gap-2">
-                    <a :href="route('vessels.export')">
+
+                    <input id="upload-file" type="file" @input="form.file = $event.target.files[0]" @change="submit" class="sr-only">
+                    <label for="upload-file" class="cursor-pointer">
+                        <div class="px-4 py-3 sm:py-2.5 text-white bg-indigo-500 hover:bg-indigo-400 rounded-lg shadow">
+                            <div class="flex items-center">
+                                <svg v-if="!importing" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                </svg>
+                                <i v-else class="fas fa-spinner fa-spin"></i>
+                                <div class="hidden sm:block ml-1">Import</div>
+                            </div>
+                        </div>
+                    </label>
+                    <a target="_blank" @click="exporting === true" :href="route('vessels.export')">
                         <div class="px-4 py-3 sm:py-2.5 text-white bg-green-500 hover:bg-green-400 rounded-lg shadow">
                             <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                                <svg v-if="!exporting" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
+                                <i v-else class="fas fa-spinner fa-spin"></i>
                                 <div class="hidden sm:block ml-1">Export</div>
                             </div>
                         </div>
@@ -41,22 +55,22 @@
                                 <thead class="bg-gray-600">
                                 <tr>
                                     <th scope="col" class="w-1/4 px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
-                                        Vessel
+                                        Unit name
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider whitespace-nowrap">
-                                        Site
+                                        Port
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         Owner
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
-                                        UIN
+                                        Beacon Hex ID
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         MMSI
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
-                                        Activity
+                                        Activity type
                                     </th>
                                     <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Edit</span>
@@ -141,13 +155,36 @@ export default {
 
     data () {
         return {
-            term: ''
+            term: '',
+            importing: false,
+            exporting: false,
+            form: this.$inertia.form({
+                file: null
+            })
         }
     },
 
     methods: {
         search () {
             this.$inertia.get(this.route('vessels.index'), {search: this.term}, {preserveState: true})
+        },
+
+        submit (e) {
+            this.importing = true;
+            const formData = new FormData();
+            formData.append('file', e.target.files[0]);
+            axios.post(this.route('vessels.import'), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+                if (response.status === 200) {
+                    this.importing = false;
+                    location.reload();
+                }
+            }).catch(error => {
+                this.importing = false;
+            })
         }
     }
 }

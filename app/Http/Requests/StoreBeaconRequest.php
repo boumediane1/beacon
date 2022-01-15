@@ -27,7 +27,7 @@ class StoreBeaconRequest extends FormRequest
     {
         return [
             'uin' => ['required', 'size:15', 'unique:beacons'],
-            'serial_number_manufacturer' => ['required', 'digits:10', 'unique:beacons'],
+            'serial_number_manufacturer' => ['required', 'unique:beacons'],
             'serial_number_sar' => ['unique:beacons'],
             'registration_date' => ['required'],
             'expiration_date' => ['required'],
@@ -41,7 +41,7 @@ class StoreBeaconRequest extends FormRequest
     public function attributes()
     {
         return [
-            'uin' => 'UIN'
+            'uin' => 'Beacon HEX ID'
         ];
     }
 }

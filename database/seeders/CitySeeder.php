@@ -31,7 +31,6 @@ class CitySeeder extends Seeder
             ['name' => 'Agadir', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Sidi Ifni', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Tantan', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'El Jadida', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Laayoune', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Boujdour', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Dakhla', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]

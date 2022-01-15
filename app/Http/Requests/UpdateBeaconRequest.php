@@ -28,7 +28,7 @@ class UpdateBeaconRequest extends FormRequest
     {
         return [
             'uin' => ['size:15', Rule::unique('beacons')->ignore($this->beacon->id)],
-            'serial_number' => ['digits:10', Rule::unique('beacons')->ignore($this->beacon->id)],
+            'serial_number' => [Rule::unique('beacons')->ignore($this->beacon->id)],
             'serial_number_sar' => ['nullable', Rule::unique('beacons')->ignore($this->beacon->id)],
             'registration_date' => ['required'],
             'expiration_date' => ['required'],

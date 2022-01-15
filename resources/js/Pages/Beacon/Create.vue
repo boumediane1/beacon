@@ -8,7 +8,7 @@
                 </template>
                 <template #form>
                     <div class="col-span-3">
-                        <Label for="uin" value="UIN"></Label>
+                        <Label for="uin" value="Beacon HEX ID"></Label>
                         <Input id="uin" type="text" v-model="form.uin" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.uin" />
                     </div>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="expiration-date" value="Expiration date" />
+                        <Label for="expiration-date" value="Battery expiration date" />
                         <Input id="expiration-date" type="date" v-model="form.expiration_date" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.expiration_date" />
                     </div>
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="type" value="Type"></Label>
+                        <Label for="type" value="Beacon type"></Label>
                         <select id="type" v-model="form.type_id" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="type in types" :key="type.id" :value="type.id" v-text="type.name"></option>
                         </select>
@@ -62,12 +62,17 @@
                     </div>
 
                     <div class="col-span-3">
-<!--                            <Switch :status="form.status" v-model="form.status" />-->
-                        <Label for="status" value="Status" />
+                        <Label for="status" value="Beacon status" />
                         <select v-model="form.status_id" id="status" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.name }}</option>
                         </select>
                         <InputError class="mt-2" :message="errors.status_id" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="tac">TAC <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="tac" type="text" v-model="form.tac" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-2" :message="errors.tac" />
                     </div>
 
                 </template>
@@ -126,7 +131,8 @@ export default {
                 manufacturer_id: 1,
                 type_id: 1,
                 model_id: 1,
-                status_id: 1
+                status_id: 1,
+                tac: ''
             }
         }
     },

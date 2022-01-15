@@ -16,27 +16,35 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('username')->unique()->nullable();
+            $table->boolean('status')->default(true);
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->integer('is_admin')->default(0);
+            $table->integer('role')->default(3);
             $table->string('phone_number')->nullable();
             $table->string('secondary_phone_number')->nullable();
             $table->string('address')->nullable();
+            $table->string('emergency_contact_name')->nullable();
+            $table->string('emergency_contact_phone_number')->nullable();
+            $table->string('secondary_emergency_contact_name')->nullable();
+            $table->string('secondary_emergency_contact_phone_number')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
 
         \App\Models\User::create([
-            'name' => 'admin',
+            'name' => 'Admin',
+            'username' => 'admin',
             'password' => \Illuminate\Support\Facades\Hash::make('admin'),
-            'is_admin' => 1
+            'role' => 1
         ]);
 
         \App\Models\User::create([
-            'name' => 'staff',
+            'name' => 'Staff',
+            'username' => 'staff',
             'password' => \Illuminate\Support\Facades\Hash::make('staff'),
-            'is_admin' => 2
+            'role' => 2
         ]);
     }
 

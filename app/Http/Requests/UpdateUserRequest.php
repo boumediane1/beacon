@@ -27,11 +27,15 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:3', Rule::unique('users')->ignore($this->user->id)],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($this->user->id)],
-            'phone_number' => ['required', Rule::unique('users')->ignore($this->user->id), 'digits:10'],
-            'secondary_phone_number' => ['nullable', Rule::unique('users')->ignore($this->user->id), 'digits:10'],
-            'address' => ['nullable', 'min:3', 'max:80']
+            'name' => ['required', 'min:2', Rule::unique('users')->ignore($this->user->id)],
+            'email' => ['nullable', 'email', Rule::unique('users')->ignore($this->user->id)],
+            'phone_number' => ['required', Rule::unique('users')->ignore($this->user->id)],
+            'secondary_phone_number' => ['nullable', Rule::unique('users')->ignore($this->user->id)],
+            'address' => ['nullable', 'min:3', 'max:80'],
+            'emergency_contact_name' => ['nullable'],
+            'emergency_contact_phone_number' => ['nullable'],
+            'secondary_emergency_contact_name' => ['nullable'],
+            'secondary_emergency_contact_phone_number' => ['nullable']
         ];
     }
 }

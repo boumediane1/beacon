@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\ProfileInformationController;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BeaconController;
 use App\Http\Controllers\VesselController;
+use App\Imports\UsersImport;
 use App\Imports\BeaconImport;
 use App\Imports\VesselImport;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +26,6 @@ use Maatwebsite\Excel\Facades\Excel;
 */
 
 Route::get('/', function () {
-    return 5;
     return \Illuminate\Support\Facades\Redirect::route('vessels.index');
 });
 
@@ -33,15 +37,19 @@ require __DIR__.'/auth.php';
 
 
 Route::get('vessels/export', [VesselController::class, 'export'])->name('vessels.export');
-Route::get('vessels/import', function () {
-    Excel::import(new BeaconImport(), 'data.xls');
-    Excel::import(new VesselImport(), 'data.xls');
-    return 'Done!';
-});
+Route::post('vessels/import', [VesselController::class, 'import'])->name('vessels.import');
 
 Route::resources([
     'users' => UserController::class,
+    'staff' => StaffController::class,
     'vessels' => VesselController::class,
     'beacons' => BeaconController::class,
     'ports' => \App\Http\Controllers\PortController::class
 ], ['middleware' => 'auth']);
+
+Route::middleware('auth')->group(function () {
+    Route::get('user/profile', [UserProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile-information', [ProfileInformationController::class, 'update'])->name('user-profile-information.update');
+    Route::put('/password', [PasswordController::class, 'update'])->name('user-password.update');
+});
+

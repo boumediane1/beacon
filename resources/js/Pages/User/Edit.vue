@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="email" value="Email"></Label>
+                        <Label for="email">Email <span class="text-gray-500">(optional)</span></Label>
                         <Input id="email" type="text" v-model="form.email" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.email" />
                     </div>
@@ -35,6 +35,30 @@
                         <Label for="address" value="Address" />
                         <Textarea id="address" v-model="form.address" class="mt-1 py-2.5 block w-full" />
                         <InputError class="mt-2" :message="errors.address" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="name">Emergency contact name <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="name" type="text" v-model="form.emergency_contact_name" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-1" :message="errors.emergency_contact_name" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="name">Emergency contact phone number <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="name" type="text" v-model="form.emergency_contact_phone_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-1" :message="errors.emergency_contact_phone_number" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="name">Secondary emergency contact name <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="name" type="text" v-model="form.secondary_emergency_contact_name" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-1" :message="errors.secondary_emergency_contact_name" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="name">Secondary emergency contact phone number <span class="text-gray-500">(optional)</span></Label>
+                        <Input id="name" type="text" v-model="form.secondary_emergency_contact_phone_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                        <InputError class="mt-1" :message="errors.secondary_emergency_contact_phone_number" />
                     </div>
 
 
@@ -85,7 +109,11 @@ export default {
                 email: this.user.email,
                 phone_number: this.user.phone_number,
                 secondary_phone_number: this.user.secondary_phone_number,
-                address: this.user.address
+                address: this.user.address,
+                emergency_contact_name: this.user.emergency_contact_name,
+                emergency_contact_phone_number: this.user.emergency_contact_phone_number,
+                secondary_emergency_contact_name: this.user.secondary_emergency_contact_name,
+                secondary_emergency_contact_phone_number: this.user.secondary_emergency_contact_phone_number
             }
         }
     },

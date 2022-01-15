@@ -26,11 +26,15 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:3', 'unique:users'],
-            'email' => ['required', 'email', 'unique:users'],
-            'phone_number' => ['required', 'unique:users', 'digits:10'],
-            'secondary_phone_number' => ['nullable', 'unique:users', 'digits:10'],
-            'address' => ['nullable', 'min:3', 'max:80']
+            'name' => ['required', 'min:2', 'unique:users'],
+            'email' => ['nullable', 'email', 'unique:users'],
+            'phone_number' => ['required', 'unique:users'],
+            'secondary_phone_number' => ['nullable', 'unique:users'],
+            'address' => ['nullable', 'min:3', 'max:80'],
+            'emergency_contact_name' => ['nullable'],
+            'emergency_contact_phone_number' => ['nullable'],
+            'secondary_emergency_contact_name' => ['nullable'],
+            'secondary_emergency_contact_phone_number' => ['nullable']
         ];
     }
 }

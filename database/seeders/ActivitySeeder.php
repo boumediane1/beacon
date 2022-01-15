@@ -15,7 +15,12 @@ class ActivitySeeder extends Seeder
     public function run()
     {
         $activities = [
-            ['name' => 'Peche']
+            ['name' => 'Fishing vessel'],
+            ['name' => 'Pleasure vessel'],
+            ['name' => 'Merchant navy'],
+            ['name' => 'Air unit'],
+            ['name' => 'Land unit']
+
         ];
 
         DB::table('activities')->insert($activities);
