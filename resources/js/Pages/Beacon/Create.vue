@@ -2,13 +2,13 @@
     <AppLayout>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <FormSection @submit.prevent="submit">
-                <template #title>New beacon</template>
+                <template #title>New beacon</template>s
                 <template #description>
-                    Add new barque and associate it to an owner, city and port.
+                    Add new beacon.
                 </template>
                 <template #form>
                     <div class="col-span-3">
-                        <Label for="uin" value="Beacon HEX ID"></Label>
+                        <Label for="uin" value="UIN"></Label>
                         <Input id="uin" type="text" v-model="form.uin" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.uin" />
                     </div>

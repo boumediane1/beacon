@@ -8,7 +8,7 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="S/N sar" autocomplete="off">
+                    <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="S/N SAR, S/N Manufacturer or UIN" autocomplete="off">
                 </div>
                 <div>
                     <Link v-if="can.create" :href="route('beacons.create')">
@@ -31,7 +31,7 @@
                                 <thead class="bg-gray-600">
                                 <tr>
                                     <th scope="col" class="w-1/3 px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
-                                        Beacon Hex ID
+                                        UIN
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         Model
@@ -115,6 +115,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import { Link } from '@inertiajs/inertia-vue3';
 import Pagination from "@/Components/Pagination";
 import Input from "@/Components/Input";
@@ -126,7 +127,7 @@ export default {
 
     props: {
         beacons: Object,
-        can: Array
+        can: Object
     },
 
     data () {
@@ -136,9 +137,9 @@ export default {
     },
 
     methods: {
-        search () {
-            this.$inertia.get(this.route('beacons.index'), {search: this.term}, {preserveState: true})
-        }
+        search: _.throttle(function () {
+            this.$inertia.get(this.route('beacons.index'), {search: this.term}, {preserveState: true});
+        }, 500)
     }
 }
 </script>

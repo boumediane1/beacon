@@ -8,27 +8,29 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Owner, Unit name or S/N sar" autocomplete="off">
+                    <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Unit name, Owner, UIN, S/N SAR or MMSI" autocomplete="off">
                 </div>
                 <div class="flex gap-2">
 
-                    <input id="upload-file" type="file" @input="form.file = $event.target.files[0]" @change="submit" class="sr-only">
-                    <label for="upload-file" class="cursor-pointer">
-                        <div class="px-4 py-3 sm:py-2.5 text-white bg-indigo-500 hover:bg-indigo-400 rounded-lg shadow">
-                            <div class="flex items-center">
-                                <svg v-if="!importing" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                </svg>
-                                <i v-else class="fas fa-spinner fa-spin"></i>
-                                <div class="hidden sm:block ml-1">Import</div>
+                    <div v-if="can.import">
+                        <input id="upload-file" type="file" @input="form.file = $event.target.files[0]" @change="submit" class="sr-only">
+                        <label for="upload-file" class="cursor-pointer">
+                            <div class="px-4 py-3 sm:py-2.5 text-white bg-indigo-500 hover:bg-indigo-400 rounded-lg shadow">
+                                <div class="flex items-center">
+                                    <svg v-if="!importing" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    <i v-else class="fas fa-spinner fa-spin"></i>
+                                    <div class="hidden sm:block ml-1">Import</div>
+                                </div>
                             </div>
-                        </div>
-                    </label>
-                    <a target="_blank" @click="exporting === true" :href="route('vessels.export')">
+                        </label>
+                    </div>
+                    <a @click="exporting === true" :href="route('vessels.export')">
                         <div class="px-4 py-3 sm:py-2.5 text-white bg-green-500 hover:bg-green-400 rounded-lg shadow">
                             <div class="flex items-center">
                                 <svg v-if="!exporting" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                                 </svg>
                                 <i v-else class="fas fa-spinner fa-spin"></i>
                                 <div class="hidden sm:block ml-1">Export</div>
@@ -64,7 +66,7 @@
                                         Owner
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
-                                        Beacon Hex ID
+                                        UIN
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         MMSI
@@ -139,6 +141,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import { Link } from '@inertiajs/inertia-vue3';
 import Pagination from "@/Components/Pagination";
 import Input from "@/Components/Input";
@@ -150,7 +153,7 @@ export default {
 
     props: {
         vessels: Object,
-        can: Array
+        can: Object
     },
 
     data () {
@@ -165,9 +168,10 @@ export default {
     },
 
     methods: {
-        search () {
-            this.$inertia.get(this.route('vessels.index'), {search: this.term}, {preserveState: true})
-        },
+        search: _.throttle(function () {
+            this.$inertia.get(this.route('vessels.index'), {search: this.term}, {preserveState: true});
+        }, 500),
+
 
         submit (e) {
             this.importing = true;

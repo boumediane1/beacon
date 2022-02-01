@@ -16,7 +16,7 @@ class CreateVesselsTable extends Migration
         Schema::create('vessels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('registration_number');
+            $table->string('registration_number')->unique();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('beacon_id')->constrained()->cascadeOnDelete();
             $table->foreignId('port_id')->constrained()->cascadeOnDelete();

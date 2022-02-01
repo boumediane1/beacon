@@ -15,9 +15,9 @@ class CreateBeaconsTable extends Migration
     {
         Schema::create('beacons', function (Blueprint $table) {
             $table->id();
-            $table->string('uin');
-            $table->string('serial_number_manufacturer');
-            $table->string('serial_number_sar')->nullable();
+            $table->string('uin')->unique();
+            $table->string('serial_number_manufacturer')->unique();
+            $table->string('serial_number_sar')->unique()->nullable();
             $table->date('registration_date');
             $table->date('expiration_date');
             $table->string('tac')->nullable();

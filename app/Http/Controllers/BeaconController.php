@@ -25,6 +25,8 @@ class BeaconController extends Controller
             ->with('model.type', 'manufacturer', 'status')
             ->when($request->input('search'), function (Builder $query, $search) {
                 $query->where('serial_number_sar', 'like', '%' . $search . '%');
+                $query->orWhere('serial_number_manufacturer', 'like', '%' . $search . '%');
+                $query->orWhere('uin', 'like', '%' . $search . '%');
             })
             ->when($request->input('id'), function (Builder $query, $search) {
                 return $query->where('id', $search);

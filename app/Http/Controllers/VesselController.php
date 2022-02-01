@@ -31,6 +31,7 @@ class VesselController extends Controller
             ->with('user', 'beacon', 'port.city', 'activity')
             ->when($request->input('search'), function (Builder $query, $search) {
                 $query->where('name', 'like', '%' . $search . '%');
+                $query->orWhere('mmsi', 'like', '%' . $search . '%');
                 $query->orWhereRelation('user', 'name', 'like', '%' . $search . '%');
                 $query->orWhereRelation('port', 'name', 'like', '%'. $search . '%');
                 $query->orWhereRelation('beacon', 'uin', 'like', '%' . $search . '%');
@@ -42,7 +43,8 @@ class VesselController extends Controller
             'can' => [
                 'create' => Auth::user()->role === 1,
                 'update' => Auth::user()->role === 1,
-                'delete' => Auth::user()->role === 1
+                'delete' => Auth::user()->role === 1,
+                'import' => Auth::user()->role === 1
             ]
         ]);
     }
@@ -50,7 +52,7 @@ class VesselController extends Controller
     public function show (Vessel $vessel) {
         $vessel = $vessel->load('user', 'beacon');
         $pdf = PDF::loadView('summary', compact('vessel'));
-        return $pdf->stream();
+        return $pdf->stream($vessel->registration_number . '.pdf');
     }
 
     public function create () {

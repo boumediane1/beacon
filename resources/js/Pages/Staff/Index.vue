@@ -61,8 +61,8 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <span :class="[user.status === 1 ? 'text-lime-800 bg-lime-100' : 'text-pink-800 bg-pink-100']" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
-                                            {{ user.status === 1 ? 'Active' : 'Inactive' }}
+                                        <span :class="[user.status ? 'text-lime-800 bg-lime-100' : 'text-pink-800 bg-pink-100']" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                                            {{ user.status ? 'Active' : 'Inactive' }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import { Link } from '@inertiajs/inertia-vue3';
 import Pagination from "@/Components/Pagination";
 import Input from "@/Components/Input";
@@ -109,9 +110,9 @@ export default {
     },
 
     methods: {
-        search () {
-            this.$inertia.get(this.route('staff.index'), {search: this.term}, {preserveState: true})
-        }
+        search: _.throttle(function () {
+            this.$inertia.get(this.route('staff.index'), {search: this.term}, {preserveState: true});
+        })
     }
 }
 </script>

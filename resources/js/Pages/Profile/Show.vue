@@ -15,11 +15,16 @@
                         <div class="col-span-6 sm:col-span-4">
                             <Label for="username" value="Username" />
                             <Input id="username" type="text" class="mt-1 block w-full" v-model="update_profile_information_form.username" autocomplete="off" />
-                            <InputError :message="update_profile_information_form.errors.username" class="mt-1 block w-full" />
+                            <InputError class="mt-2" :message="update_profile_information_form.errors.username" />
                         </div>
                     </template>
 
                     <template #actions>
+
+                        <jet-action-message :on="update_profile_information_form.recentlySuccessful" class="mr-3">
+                            Saved.
+                        </jet-action-message>
+
                         <Button>Save</Button>
                     </template>
                 </FormSection>
@@ -43,23 +48,27 @@
                         <div class="col-span-6 sm:col-span-4">
                             <Label for="current_password" value="Current Password" />
                             <Input id="current_password" type="password" class="mt-1 block w-full" v-model="update_password_form.current_password" ref="current_password" />
-                            <InputError :message="update_password_form.errors.current_password" />
+                            <InputError class="mt-2" :message="update_password_form.errors.current_password" />
                         </div>
 
                         <div class="col-span-6 sm:col-span-4">
                             <Label for="password" value="New Password" />
                             <Input id="password" type="password" class="mt-1 block w-full" v-model="update_password_form.password" ref="password" />
-                            <InputError :message="update_password_form.errors.password" />
+                            <InputError class="mt-2" :message="update_password_form.errors.password" />
                         </div>
 
                         <div class="col-span-6 sm:col-span-4">
                             <Label for="password_confirmation" value="Confirm Password" />
                             <Input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="update_password_form.password_confirmation" />
-                            <InputError :message="update_password_form.errors.password_confirmation" />
+                            <InputError class="mt-2" :message="update_password_form.errors.password_confirmation" />
                         </div>
                     </template>
 
                     <template #actions>
+                        <jet-action-message :on="update_password_form.recentlySuccessful" class="mr-3">
+                            Saved.
+                        </jet-action-message>
+
                         <Button>Save</Button>
                     </template>
                 </FormSection>
@@ -69,15 +78,17 @@
 </template>
 
 <script>
+import JetActionMessage from '@/Components/ActionMessage';
 import Button from "@/Components/Button";
 import InputError from "@/Components/InputError";
 import Input from "@/Components/Input";
 import Label from "@/Components/Label";
 import FormSection from "@/Components/FormSection";
 import AppLayout from '@/Layouts/Authenticated';
+import ActionMessage from "@/Components/ActionMessage";
 export default {
     components: {
-        AppLayout, FormSection, Label, Input, InputError, Button
+        AppLayout, FormSection, Label, Input, InputError, Button, JetActionMessage
     },
 
     props: ['user'],

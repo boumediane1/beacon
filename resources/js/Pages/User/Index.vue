@@ -94,6 +94,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import { Link } from '@inertiajs/inertia-vue3';
 import Pagination from "@/Components/Pagination";
 import Input from "@/Components/Input";
@@ -105,7 +106,7 @@ export default {
 
     props: {
         users: Object,
-        can: Array
+        can: Object
     },
 
     data () {
@@ -115,9 +116,9 @@ export default {
     },
 
     methods: {
-        search () {
-            this.$inertia.get(this.route('users.index'), {search: this.term}, {preserveState: true})
-        }
+        search: _.throttle(function () {
+            this.$inertia.get(this.route('users.index'), {search: this.term}, {preserveState: true});
+        })
     }
 }
 </script>

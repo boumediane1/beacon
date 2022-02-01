@@ -25,14 +25,14 @@ class PortSeeder extends Seeder
             ['name' => 'Ahdid', 'city_id' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Al Hoceima Port', 'city_id' => 2, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Inouarane', 'city_id' => 2, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Kalairis', 'city_id' => 2, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Calairis', 'city_id' => 2, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Jebha Port', 'city_id' => 3, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Chmaala', 'city_id' => 3, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Amtar', 'city_id' => 3, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Targha', 'city_id' => 3, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Kaa Asrass', 'city_id' => 3, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'M\'diq Port', 'city_id' => 4, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Findeq', 'city_id' => 4, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Fnideq', 'city_id' => 4, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Martil', 'city_id' => 4, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Oued Laou', 'city_id' => 4, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Belyounech', 'city_id' => 4, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
@@ -45,6 +45,7 @@ class PortSeeder extends Seeder
             ['name' => 'Moulay Bousselham', 'city_id' => 7, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Rabat/Salé', 'city_id' => 7, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Skhirat', 'city_id' => 7, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Kénitra Port', 'city_id' => 7, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Mohammedia Port', 'city_id' => 8, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Bouznika', 'city_id' => 8, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Essanaoubar', 'city_id' => 8, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
@@ -77,7 +78,7 @@ class PortSeeder extends Seeder
             ['name' => 'Sidi Ouarzeg', 'city_id' => 14, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Sidi Ali Jama', 'city_id' => 14, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Oued Noun', 'city_id' => 14, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Tantan port', 'city_id' => 15, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Tantan Port', 'city_id' => 15, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Oued Chbika', 'city_id' => 15, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Rass Oumlil', 'city_id' => 15, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Ben Khlil', 'city_id' => 15, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
@@ -98,7 +99,7 @@ class PortSeeder extends Seeder
             ['name' => 'Lamhiriz', 'city_id' => 18, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Imoutlane', 'city_id' => 18, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Ain Beida', 'city_id' => 18, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-
+            ['name' => 'Dakhla Port', 'city_id' => 18, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
         ];
 
         DB::table('ports')->insert($ports);

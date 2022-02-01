@@ -4,7 +4,7 @@
             <FormSection @submit.prevent="submit">
                 <template #title>New vessel</template>
                 <template #description>
-                    Add new vessel and associate it to an owner, city and port.
+                    Add new vessel and associate it to an owner and a beacon.
                 </template>
                 <template #form>
                     <div class="col-span-3">
@@ -85,7 +85,7 @@
                     <div class="col-span-3">
                         <Label for="port" value="Port of registration"></Label>
                         <select :disabled="!form.city_id" v-model="form.port_id" id="port" :class="{'cursor-not-allowed': !form.city_id}" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                            <option v-for="port in ports" :key="port.id" :value="port.id" v-text="port.name"></option>
+                            <option v-for="port in filtredPorts" :key="port.id" :value="port.id" v-text="port.name"></option>
                         </select>
                         <InputError class="mt-2" :message="errors.port_id" />
                     </div>
@@ -133,7 +133,7 @@ export default {
 
     data () {
         return {
-            ports: this.ports,
+            filtredPorts: this.ports,
             form: {
                 name: '',
                 registration_number: '',
@@ -155,7 +155,7 @@ export default {
 
     watch: {
         'form.city_id': function () {
-            this.ports = this.ports.filter(port => port.city_id === this.form.city_id);
+            this.filtredPorts = this.ports.filter(port => port.city_id === this.form.city_id);
         },
 
         'form.user_id': function () {

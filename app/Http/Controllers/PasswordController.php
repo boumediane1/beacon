@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class PasswordController extends Controller
@@ -17,5 +18,7 @@ class PasswordController extends Controller
 
 
         $request->user()->update(array('password' => Hash::make($request->input('password'))));
+
+        return Redirect::route('profile.show');
     }
 }

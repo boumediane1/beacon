@@ -2,9 +2,9 @@
     <AppLayout>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <FormSection @submit.prevent="update">
-                <template #title>New barque</template>
+                <template #title>Owner information</template>
                 <template #description>
-                    Add new barque and associate it to an owner, city and port.
+                    Update owner information.
                 </template>
                 <template #form>
                     <div class="col-span-3">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStaffRequest;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -38,7 +39,13 @@ class StaffController extends Controller
 
     public function store (StoreStaffRequest $request) {
         Gate::authorize('create', User::class);
-        User::create($request->validated() + ['role' => 2]);
+        User::create([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'password' => Hash::make($request->input('password')),
+            'status' => $request->input('status'),
+            'role' => 2
+        ]);
         return Redirect::route('staff.index');
     }
 

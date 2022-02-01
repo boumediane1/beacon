@@ -2,30 +2,30 @@
     <AppLayout>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <FormSection @submit.prevent="submit">
-                <template #title>New owner</template>
+                <template #title>New staff</template>
                 <template #description>
-                    Add new barque and associate it to an owner, city and port.
+                    Add new staff.
                 </template>
                 <template #form>
-                    <div class="col-span-3">
+                    <div class="col-span-4">
                         <Label for="name" value="Staff"></Label>
                         <Input id="name" type="text" v-model="form.name" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-1" :message="errors.name" />
                     </div>
 
-                    <div class="col-span-3">
+                    <div class="col-span-4">
                         <Label for="username" value="Username"></Label>
                         <Input id="username" type="text" v-model="form.username" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-1" :message="errors.username" />
                     </div>
 
-                    <div class="col-span-3">
+                    <div class="col-span-4">
                         <Label for="password" value="Password"></Label>
                         <Input id="password" type="password" v-model="form.password" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-1" :message="errors.password" />
                     </div>
 
-                    <div class="col-span-6">
+                    <div class="col-span-4">
                         <label for="status" class="block">Status</label>
                         <Switch id="status" :status="form.status" v-model="form.status" class="mt-1" />
                     </div>

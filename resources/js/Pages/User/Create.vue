@@ -4,7 +4,7 @@
             <FormSection @submit.prevent="submit">
                 <template #title>New owner</template>
                 <template #description>
-                    Add new barque and associate it to an owner, city and port.
+                    Add new owner.
                 </template>
                 <template #form>
                     <div class="col-span-3">

@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('username')->unique()->nullable();
             $table->boolean('status')->default(true);
             $table->string('email')->unique()->nullable();
@@ -38,13 +38,6 @@ class CreateUsersTable extends Migration
             'username' => 'admin',
             'password' => \Illuminate\Support\Facades\Hash::make('admin'),
             'role' => 1
-        ]);
-
-        \App\Models\User::create([
-            'name' => 'Staff',
-            'username' => 'staff',
-            'password' => \Illuminate\Support\Facades\Hash::make('staff'),
-            'role' => 2
         ]);
     }
 

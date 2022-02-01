@@ -15,7 +15,17 @@ class ManufacturerSeeder extends Seeder
     public function run()
     {
         $manufacturers = [
-            ['name' => 'GME']
+            ['name' => 'GME'],
+            ['name' => 'McMurdo'],
+            ['name' => 'Orolia Limited'],
+            ['name' => 'ACR'],
+            ['name' => 'Ocean Signal'],
+            ['name' => 'Cobham'],
+            ['name' => 'JRC'],
+            ['name' => 'Jotron'],
+            ['name' => 'WamBlee'],
+            ['name' => 'SAMYUNG ENC']
+
         ];
 
         DB::table('manufacturers')->insert($manufacturers);
