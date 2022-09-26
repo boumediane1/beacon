@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="serial-number" value="S/N Manufacturer"></Label>
+                        <Label for="serial-number">S/N Manufacturer <span class="text-gray-500">(optional)</span></Label>
                         <Input id="serial-number" type="text" v-model="form.serial_number_manufacturer" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.serial_number_manufacturer" />
                     </div>
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="manufacturer" value="Manufacturer"></Label>
+                        <Label for="manufacturer">Manufacturer <span class="text-gray-500">(optional)</span></Label>
                         <select id="manufacturer" v-model="form.manufacturer_id" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="manufacturer in manufacturers" :key="manufacturer.id" :value="manufacturer.id" v-text="manufacturer.name"></option>
                         </select>
@@ -54,11 +54,19 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="model" value="Model"></Label>
+                        <Label for="manufacturer">Model <span class="text-gray-500">(optional)</span></Label>
                         <select :disabled="filteredModels.length === 0" id="model" v-model="form.model_id" :class="{'cursor-not-allowed': filteredModels.length === 0}" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="model in filteredModels" :key="model.id" :value="model.id" v-text="model.name"></option>
                         </select>
                         <InputError class="mt-2" :message="errors.model_id" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="registration_status" value="Registration status"></Label>
+                        <select id="registration_status" v-model="form.registration_status_id" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option v-for="registrationStatus in registrationStatuses" :key="registrationStatus.id" :value="registrationStatus.id" v-text="registrationStatus.name"></option>
+                        </select>
+                        <InputError class="mt-2" :message="errors.registrationStatus_id" />
                     </div>
 
                     <div class="col-span-3">
@@ -88,11 +96,9 @@
 
 <script>
 
-import Switch from '@/Components/Switch';
 import Textarea from "@/Components/Textarea";
 import FormSection from "@/Components/FormSection";
 import Multiselect from '@vueform/multiselect';
-import Listbox from "@/Components/Listbox";
 import AppLayout from '@/Layouts/Authenticated';
 import Label from "@/Components/Label";
 import Input from "@/Components/Input";
@@ -106,9 +112,8 @@ export default {
         Input,
         Label,
         AppLayout,
-        Listbox,
         Multiselect,
-        FormSection, Switch
+        FormSection
     },
 
     props: {
@@ -116,7 +121,8 @@ export default {
         types: Array,
         models: Array,
         errors: Object,
-        statuses: Array
+        registrationStatuses: Array,
+        statuses: Array,
     },
 
     data () {
@@ -128,10 +134,11 @@ export default {
                 serial_number_sar: '',
                 registration_date: '',
                 expiration_date: '',
-                manufacturer_id: 1,
+                manufacturer_id: '',
                 type_id: 1,
-                model_id: 1,
+                model_id: '',
                 status_id: 1,
+                registration_status_id: 1,
                 tac: ''
             }
         }

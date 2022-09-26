@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Manufacturer;
+use App\Models\UnitType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,13 +17,17 @@ class DatabaseSeeder extends Seeder
     {
 //         \App\Models\User::factory(10)->create();
         $this->call([
+            CountrySeeder::class,
+            UserSeeder::class,
             CitySeeder::class,
             PortSeeder::class,
             ActivitySeeder::class,
+            UnitTypeSeeder::class,
             TypeSeeder::class,
             ModelSeeder::class,
             ManufacturerSeeder::class,
-            StatusSeeder::class
+            StatusSeeder::class,
+            RegistrationStatusSeeder::class,
         ]);
     }
 }

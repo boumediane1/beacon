@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Country;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -39,7 +40,9 @@ class UserController extends Controller
     }
     public function create () {
         Gate::authorize('create', User::class);
-        return Inertia::render('User/Create');
+        return Inertia::render('User/Create', [
+            'countries' => Country::all()
+        ]);
     }
 
     public function store (StoreUserRequest $request) {
@@ -51,7 +54,8 @@ class UserController extends Controller
     public function edit (User $user) {
         Gate::authorize('update', $user);
         return Inertia::render('User/Edit', [
-            'user' => $user
+            'user' => $user,
+            'countries' => Country::all()
         ]);
     }
 

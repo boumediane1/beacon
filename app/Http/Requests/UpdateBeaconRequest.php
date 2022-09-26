@@ -28,13 +28,14 @@ class UpdateBeaconRequest extends FormRequest
     {
         return [
             'uin' => ['size:15', Rule::unique('beacons')->ignore($this->beacon->id)],
-            'serial_number' => [Rule::unique('beacons')->ignore($this->beacon->id)],
+            'serial_number_manufacturer' => ['nullable', Rule::unique('beacons')->ignore($this->beacon->id)],
             'serial_number_sar' => ['nullable', Rule::unique('beacons')->ignore($this->beacon->id)],
             'registration_date' => ['required'],
             'expiration_date' => ['required'],
-            'manufacturer_id' => ['required'],
+            'manufacturer_id' => ['nullable'],
             'type_id' => ['required'],
-            'model_id' => ['required'],
+            'model_id' => ['nullable'],
+            'registration_status_id' => ['required'],
             'status_id' => ['required']
         ];
     }

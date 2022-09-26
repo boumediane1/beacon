@@ -49,6 +49,13 @@ export default {
         usersRouteIsActive () {
             return route().current('users.index') || route().current('users.create') || route().current('users.edit');
         }
+    },
+
+    mounted () {
+        if (!this.route().current('vessels.index')) {
+            sessionStorage.clear();
+            console.log('clear')
+        }
     }
 }
 </script>

@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="serial-number-manufacturer" value="S/N Manufacturer"></Label>
+                        <Label for="serial-number-manufacturer">S/N Manufacturer <span class="text-gray-500">(optional)</span></Label>
                         <Input id="serial-number-manufacturer" type="text" v-model="form.serial_number_manufacturer" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-2" :message="errors.serial_number" />
                     </div>
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="manufacturer" value="Manufacturer"></Label>
+                        <Label for="manufacturer">Manufacturer <span class="text-gray-500">(optional)</span></Label>
                         <select id="manufacturer" v-model="form.manufacturer_id" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="manufacturer in manufacturers" :key="manufacturer.id" :value="manufacturer.id" v-text="manufacturer.name"></option>
                         </select>
@@ -54,10 +54,18 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="model" value="Model"></Label>
+                        <Label for="model">Model <span class="text-gray-500">(optional)</span></Label>
                         <select :disabled="filteredModels.length === 0" id="model" v-model="form.model_id" :class="{'cursor-not-allowed': filteredModels.length === 0}" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="model in filteredModels" :key="model.id" :value="model.id" v-text="model.name"></option>
                         </select>
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="registration_status" value="Registration status"></Label>
+                        <select id="registration_status" v-model="form.registration_status" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option v-for="registrationStatus in registrationStatuses" :key="registrationStatus.id" :value="registrationStatus.id" v-text="registrationStatus.name"></option>
+                        </select>
+                        <InputError class="mt-2" :message="errors.registrationStatus_id" />
                     </div>
 
                     <div class="col-span-3">
@@ -86,11 +94,9 @@
 
 <script>
 
-import Switch from '@/Components/Switch';
 import Textarea from "@/Components/Textarea";
 import FormSection from "@/Components/FormSection";
 import Multiselect from '@vueform/multiselect';
-import Listbox from "@/Components/Listbox";
 import AppLayout from '@/Layouts/Authenticated';
 import Label from "@/Components/Label";
 import Input from "@/Components/Input";
@@ -104,9 +110,8 @@ export default {
         Input,
         Label,
         AppLayout,
-        Listbox,
         Multiselect,
-        FormSection, Switch
+        FormSection,
     },
 
     props: {
@@ -115,6 +120,7 @@ export default {
         types: Array,
         models: Array,
         errors: Object,
+        registrationStatuses: Array,
         statuses: Array
     },
 
@@ -128,8 +134,9 @@ export default {
                 registration_date: this.beacon.registration_date,
                 expiration_date: this.beacon.expiration_date,
                 manufacturer_id: this.beacon.manufacturer_id,
-                type_id: this.beacon.model.type_id,
+                type_id: this.beacon.type_id,
                 model_id: this.beacon.model_id,
+                registration_status_id: this.beacon.registration_status_id,
                 status_id: this.beacon.status_id,
                 tac: this.beacon.tac
             }

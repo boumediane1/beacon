@@ -1,9 +1,56 @@
 <html>
     <head>
         <style>
+
+            .square:before {
+                content: '';
+                display: inline-block;
+                width: 15px;
+                height: 15px;
+                border: 1px solid black;
+                margin-top: 3px;
+            }
+
+            .square-full:before {
+                background-color: #1e293b;
+            }
+
             body {
                 font-family: 'Nunito', sans-serif;
+                line-height: 1.5rem;
             }
+
+            .image-wrapper {
+                text-align: center;
+            }
+
+            img {
+                width: 280px;
+            }
+
+            .title-wrapper {
+                width: 360px;
+                margin: 0 auto;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 1.3rem;
+                color: #ef4444;
+                font-weight: bold;
+            }
+
+            .box-wrapper {
+                border: 1px solid #6b7280;
+                padding: 8px;
+                border-radius: 0.125rem;
+                margin-top: 10px
+            }
+
+            .beacon-type {
+                font-weight: bold;
+            }
+
             .header {
                 font-size: 1.5rem;
                 background-color: #fed7aa;
@@ -17,79 +64,102 @@
                 font-weight: bold;
                 padding-right: 32px;
             }
-            img {
-                width: 6rem;
-            }
-            .image-wrapper {
-                text-align: center;
-            }
         </style>
     </head>
 
     <body>
+
     <div class="image-wrapper">
-        <img src="images/logo.jpg" alt="">
+        <img src="images/royaume-du-maroc.png" alt="">
     </div>
 
-    <h3 class="header">Beacon information</h3>
-    <table>
-        <tbody>
-        <tr>
-            <td class="cell-header">Beacon Hex ID</td>
-            <td>{{ $vessel->beacon->uin }}</td>
-        </tr>
+    <div class="title-wrapper">
+        <h1>Formulaire d'enregistrement des balises de détresse 406 MHz</h1>
+    </div>
 
-        <tr>
-            <td class="cell-header">Beacon type</td>
-            <td>{{ $vessel->beacon->model->type->name }}</td>
-        </tr>
 
-        <tr>
-            <td class="cell-header">Beacon status</td>
-            <td>{{ $vessel->beacon->status->name  }}</td>
-        </tr>
+    <div>
+        <span>Type de balise : </span>
+        <span class="square"></span>
+        <span>PLB</span>
 
-        <tr>
-            <td class="cell-header">Registration date</td>
-            <td>{{ \Carbon\Carbon::parse($vessel->beacon->registration_date)->format('F d, Y')  }}</td>
-        </tr>
+        <span style="visibility: hidden">A</span>
 
-        <tr>
-            <td class="cell-header">Battery expiration date</td>
-            <td>{{ \Carbon\Carbon::parse($vessel->beacon->expiration_date)->format('F d, Y')  }}</td>
-        </tr>
+        <span class="square square-full"></span>
+        <span>EPIRB</span>
+{{--        <span style="font-weight: bold;">{{ $vessel->beacon->type->name  }}</span>--}}
+    </div>
 
-        <tr>
-            <td class="cell-header">Manufacturer</td>
-            <td>{{ $vessel->beacon->manufacturer->name  }}</td>
-        </tr>
+    <div class="box-wrapper">
+        <div>
+            <span style="font-weight: bold;">1) Information relatives à la balise 406MHz</span>
+            (à remplir obligatoirement) :
+        </div>
 
-        <tr>
-            <td class="cell-header">S/N manufacturer</td>
-            <td>{{ $vessel->beacon->serial_number_manufacturer  }}</td>
-        </tr>
+        <div style="margin-top: 10px;">
+            <div>Indentification de la balise - Code HEX ID (les 15 caractères hexadécimaux) :</div>
+            <div style="font-weight: bold;">{{ join(array_map(function ($character) { return '[' . $character . '] '; }, str_split($vessel->beacon->uin))) }}</div>
+        </div>
 
-        <tr>
-            <td class="cell-header">S/N SAR</td>
-            <td>{{ $vessel->beacon->serial_number_sar  }}</td>
-        </tr>
+        <div style="margin-top: 10px">
+            <span>Fabricant : </span>
+            <span style="font-weight: bold;">{{ $vessel->beacon->manufacturer->name ?? '' }}</span>
 
-        <tr>
-            <td class="cell-header">Model</td>
-            <td>{{ $vessel->beacon->model->name  }}</td>
-        </tr>
+            <span style="visibility: hidden;">AA</span>
 
-        <tr>
-            <td class="cell-header">TAC</td>
-            <td>{{ $vessel->beacon->tac  }}</td>
-        </tr>
+            <span>Modèle : </span>
+            <span style="white-space: nowrap; font-weight: bold;">{{ $vessel->beacon->type->name }} {{ $vessel->beacon->model->name }}</span>
 
-        <tr>
-            <td class="cell-header">Updated at</td>
-            <td>{{ \Carbon\Carbon::parse($vessel->beacon->updated_at)->format('F d, Y g:i A') }}</td>
-        </tr>
-        </tbody>
-    </table>
+            <span style="visibility: hidden;">AA</span>
+
+            <span style="white-space: nowrap;">S/N fabricant : </span>
+            <span style="font-weight: bold;">{{ $vessel->beacon->serial_number_manufacturer }}</span>
+
+            <span style="visibility: hidden;">AA</span>
+
+            <span>S/N SAR : </span>
+            <span style="font-weight: bold;">{{ $vessel->beacon->serial_number_sar }}</span>
+        </div>
+    </div>
+
+    <div class="box-wrapper">
+        <div>
+            <span style="font-weight: bold;">2) Enregistrement de la balise</span>
+            : (à remplir obligatoirement) :
+        </div>
+        <table style="width: 106%;">
+            <tr>
+                <td>
+                    <span class="square"></span>
+                    Nouvel enregistrement de la balise
+                </td>
+                <td>
+                    <span class="square"></span>
+                    Remplacement de la balise
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="square square-full"></span>
+                    Renouvellment de l'enregistrement de la balise
+                </td>
+                <td>
+                    <span class="square"></span>
+                    Radiation de la balise
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="square"></span>
+                    <span>Changement des informations de la balise ou du propriétaire</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+{{--    <td>{{ \Carbon\Carbon::parse($vessel->beacon->updated_at)->format('F d, Y g:i A') }}</td>--}}
+
+    <i class="fa-solid fa-user"></i>
 
     <h3 class="header">Unit information</h3>
     <table>

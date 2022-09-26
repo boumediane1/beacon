@@ -9,6 +9,7 @@ use App\Imports\VesselImport;
 use App\Imports\UsersImport;
 use App\Imports\BeaconImport;
 use App\Models\Activity;
+use App\Models\UnitType;
 use App\Models\Vessel;
 use App\Models\Beacon;
 use App\Models\City;
@@ -37,7 +38,7 @@ class VesselController extends Controller
                 $query->orWhereRelation('beacon', 'uin', 'like', '%' . $search . '%');
             })
             ->latest()
-            ->paginate(5);
+            ->paginate(8);
         return Inertia::render('Vessel/Index', [
             'vessels' => $vessels,
             'can' => [
@@ -52,7 +53,7 @@ class VesselController extends Controller
     public function show (Vessel $vessel) {
         $vessel = $vessel->load('user', 'beacon');
         $pdf = PDF::loadView('summary', compact('vessel'));
-        return $pdf->stream($vessel->registration_number . '.pdf');
+        return $pdf->stream($vessel->name . '.pdf');
     }
 
     public function create () {
@@ -66,12 +67,14 @@ class VesselController extends Controller
             ->get();
         $cities = City::query()->orderBy('name')->get();
         $ports = Port::query()->orderBy('name')->get();
-        $activities = Activity::all();
+        $activities = Activity::with('unitTypes')->get();
+        $unit_types = UnitType::query()->orderBy('name')->get();
 
         return Inertia::render('Vessel/Create', [
             'cities' => $cities,
             'ports' => $ports,
             'activities' => $activities,
+            'unitTypes' => $unit_types,
             'users' => $users,
             'beacons' => $beacons
         ]);
@@ -89,6 +92,7 @@ class VesselController extends Controller
         $cities = City::all();
         $ports = Port::all();
         $activities = Activity::all();
+        $unit_types = UnitType::query()->orderBy('name')->get();
         $users = User::query()
             ->where('role', 3)
             ->get();
@@ -98,6 +102,7 @@ class VesselController extends Controller
             'cities' => $cities,
             'ports' => $ports,
             'activities' => $activities,
+            'unitTypes' => $unit_types,
             'users' => $users,
             'beacons' => $beacons
         ]);

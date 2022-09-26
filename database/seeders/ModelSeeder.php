@@ -37,35 +37,35 @@ class ModelSeeder extends Seeder
             ['name' => 'SmartFind G8 AIS', 'type_id' => 2],
 
 
-            ['name' => 'FastFind Return Link', 'type_id' => 3],
+            ['name' => 'FastFind Return Link', 'type_id' => 1],
 
-            ['name' => 'PLB-375', 'type_id' => 4],
-            ['name' => 'PLB-425', 'type_id' => 4],
-            ['name' => 'PLB-350B', 'type_id' => 4],
-            ['name' => 'PLB-350C', 'type_id' => 4],
-            ['name' => 'PLB-400', 'type_id' => 4],
-            ['name' => 'PLB-410', 'type_id' => 4],
-            ['name' => 'PLB-435', 'type_id' => 4],
-            ['name' => 'RLB-3 6', 'type_id' => 4],
-            ['name' => 'RLB-3 7', 'type_id' => 4],
-            ['name' => 'RLB-3 8', 'type_id' => 4],
-            ['name' => 'RLB-4 0', 'type_id' => 4],
-            ['name' => 'GLOBALFIX V4', 'type_id' => 4],
+            ['name' => 'PLB-375', 'type_id' => 1],
+            ['name' => 'PLB-425', 'type_id' => 1],
+            ['name' => 'PLB-350B', 'type_id' => 1],
+            ['name' => 'PLB-350C', 'type_id' => 1],
+            ['name' => 'PLB-400', 'type_id' => 1],
+            ['name' => 'PLB-410', 'type_id' => 1],
+            ['name' => 'PLB-435', 'type_id' => 1],
+            ['name' => 'RLB-3 6', 'type_id' => 1],
+            ['name' => 'RLB-3 7', 'type_id' => 1],
+            ['name' => 'RLB-3 8', 'type_id' => 1],
+            ['name' => 'RLB-4 0', 'type_id' => 1],
+            ['name' => 'GLOBALFIX V4', 'type_id' => 1],
 
-            ['name' => 'RescueME PLB1', 'type_id' => 5],
-            ['name' => 'SafeSea E100', 'type_id' => 5],
-            ['name' => 'SafeSea E100G', 'type_id' => 5],
+            ['name' => 'RescueME PLB1', 'type_id' => 1],
+            ['name' => 'SafeSea E100', 'type_id' => 1],
+            ['name' => 'SafeSea E100G', 'type_id' => 1],
 
-            ['name' => 'SAILOR 4065', 'type_id' => 6],
+            ['name' => 'SAILOR 4065', 'type_id' => 1],
 
-            ['name' => 'JQE-103', 'type_id' => 7],
+            ['name' => 'JQE-103', 'type_id' => 1],
 
-            ['name' => 'Tron 405 MkII', 'type_id' => 8],
+            ['name' => 'Tron 405 MkII', 'type_id' => 1],
 
-            ['name' => 'W100', 'type_id' => 8],
-            ['name' => 'W200 V4', 'type_id' => 8],
+            ['name' => 'W100', 'type_id' => 1],
+            ['name' => 'W200 V4', 'type_id' => 1],
 
-            ['name' => 'SEP-500', 'type_id' => 9]
+            ['name' => 'SEP-500', 'type_id' => 1]
         ];
 
         DB::table('models')->insert($models);

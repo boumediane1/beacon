@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="col-span-3">
-                        <Label for="phone-number" value="Phone number" />
+                        <Label for="phone-number">Phone number <span class="text-gray-500">(optional)</span></Label>
                         <Input id="phone-number" type="text" v-model="form.phone_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-1" :message="errors.phone_number" />
                     </div>
@@ -30,6 +30,14 @@
                         <Label for="secondary-phone-number">Secondary phone number <span class="text-gray-500">(optional)</span></Label>
                         <Input id="secondary-phone-number" type="text" v-model="form.secondary_phone_number" class="mt-1 py-2.5 block w-full" autocomplete="off" />
                         <InputError class="mt-1" :message="errors.secondary_phone_number" />
+                    </div>
+
+                    <div class="col-span-3">
+                        <Label for="country" value="Country"></Label>
+                        <select id="country" v-model="form.country_id" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option v-for="country in countries" :key="country.id" :value="country.id" v-text="country.name"></option>
+                        </select>
+                        <InputError class="mt-2" :message="errors.country_id" />
                     </div>
 
                     <div class="col-span-6">
@@ -78,7 +86,6 @@ import Textarea from "@/Components/Textarea";
 import InputError from "@/Components/InputError";
 import FormSection from "@/Components/FormSection";
 import Multiselect from '@vueform/multiselect';
-import Listbox from "@/Components/Listbox";
 import AppLayout from '@/Layouts/Authenticated';
 import Label from "@/Components/Label";
 import Input from "@/Components/Input";
@@ -96,7 +103,8 @@ export default {
     },
 
     props: {
-        errors: Object
+        errors: Object,
+        countries: Array
     },
 
     data () {
@@ -106,6 +114,7 @@ export default {
                 email: '',
                 phone_number: '',
                 secondary_phone_number: '',
+                country_id: 1,
                 address: '',
                 emergency_contact_name: '',
                 emergency_contact_phone_number: '',

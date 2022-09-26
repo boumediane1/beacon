@@ -70,8 +70,8 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{ beacon.model.type.name }}</div>
-                                            <div class="text-sm text-gray-500">{{ beacon.model.name }}</div>
+                                            <div class="text-sm text-gray-500">{{ beacon.type.name }}</div>
+                                            <div class="text-sm text-gray-500">{{ beacon.model?.name }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="relative">

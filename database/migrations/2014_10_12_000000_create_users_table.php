@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('role')->default(3);
             $table->string('phone_number')->nullable();
             $table->string('secondary_phone_number')->nullable();
+            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
             $table->string('address')->nullable();
             $table->string('emergency_contact_name')->nullable();
             $table->string('emergency_contact_phone_number')->nullable();
@@ -33,12 +34,13 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        \App\Models\User::create([
-            'name' => 'Admin',
-            'username' => 'admin',
-            'password' => \Illuminate\Support\Facades\Hash::make('admin'),
-            'role' => 1
-        ]);
+//        \App\Models\User::create([
+//            'name' => 'Admin',
+//            'username' => 'admin',
+//            'password' => \Illuminate\Support\Facades\Hash::make('admin'),
+//            'role' => 1,
+//            'country_id' => 1,
+//        ]);
     }
 
     /**

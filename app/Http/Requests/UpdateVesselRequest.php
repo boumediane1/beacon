@@ -31,6 +31,7 @@ class UpdateVesselRequest extends FormRequest
             'registration_number' => ['required', 'min:3', Rule::unique('vessels')->ignore($this->vessel->id)],
             'beacon_id' => ['required'],
             'activity_id' => ['required'],
+            'unit_type_id' => ['nullable'],
             'city_id' => ['required'],
             'port_id' => ['required'],
             'mmsi' => ['nullable', 'size:9']

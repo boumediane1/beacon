@@ -16,14 +16,16 @@ class CreateBeaconsTable extends Migration
         Schema::create('beacons', function (Blueprint $table) {
             $table->id();
             $table->string('uin')->unique();
-            $table->string('serial_number_manufacturer')->unique();
+            $table->string('serial_number_manufacturer')->unique()->nullable();
             $table->string('serial_number_sar')->unique()->nullable();
             $table->date('registration_date');
             $table->date('expiration_date');
             $table->string('tac')->nullable();
             $table->foreignId('status_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('manufacturer_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('model_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('registration_status_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('manufacturer_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('type_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('model_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

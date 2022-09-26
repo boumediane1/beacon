@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBeaconRequest extends FormRequest
+class   StoreBeaconRequest extends FormRequest
 {
     protected $stopOnFirstFailure = true;
 
@@ -27,13 +27,14 @@ class StoreBeaconRequest extends FormRequest
     {
         return [
             'uin' => ['required', 'size:15', 'unique:beacons'],
-            'serial_number_manufacturer' => ['required', 'unique:beacons'],
-            'serial_number_sar' => ['unique:beacons'],
+            'serial_number_manufacturer' => ['nullable', 'unique:beacons'],
+            'serial_number_sar' => ['nullable', 'unique:beacons'],
             'registration_date' => ['required'],
             'expiration_date' => ['required'],
-            'manufacturer_id' => ['required'],
+            'manufacturer_id' => ['nullable'],
             'type_id' => ['required'],
-            'model_id' => ['required'],
+            'model_id' => ['nullable'],
+            'registration_status_id' => ['required'],
             'status_id' => ['required']
         ];
     }

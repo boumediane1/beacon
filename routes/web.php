@@ -25,6 +25,10 @@ use Maatwebsite\Excel\Facades\Excel;
 |
 */
 
+//Route::get('/activities', function () {
+//    return \App\Models\Activity::with('unitTypes')->get();
+//});
+
 Route::get('/', function () {
     return \Illuminate\Support\Facades\Redirect::route('vessels.index');
 });

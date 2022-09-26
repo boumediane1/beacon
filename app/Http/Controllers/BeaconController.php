@@ -8,6 +8,7 @@ use App\Imports\BeaconImport;
 use App\Models\Beacon;
 use App\Models\Manufacturer;
 use App\Models\Model;
+use App\Models\RegistrationStatus;
 use App\Models\Status;
 use App\Models\Type;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,7 +23,7 @@ class BeaconController extends Controller
 {
     public function index (Request $request) {
         $beacons = Beacon::query()
-            ->with('model.type', 'manufacturer', 'status')
+            ->with('type', 'model', 'manufacturer', 'status')
             ->when($request->input('search'), function (Builder $query, $search) {
                 $query->where('serial_number_sar', 'like', '%' . $search . '%');
                 $query->orWhere('serial_number_manufacturer', 'like', '%' . $search . '%');
@@ -49,13 +50,14 @@ class BeaconController extends Controller
             'manufacturers' => Manufacturer::all(),
             'types' => Type::all(),
             'models' => Model::all(),
-            'statuses' => Status::all()
+            'statuses' => Status::all(),
+            'registrationStatuses' => RegistrationStatus::all()
         ]);
     }
 
     public function store (StoreBeaconRequest $request) {
         Gate::authorize('create', Beacon::class);
-        Beacon::create($request->except('type_id'));
+        Beacon::create($request->validated());
         return Redirect::route('beacons.index');
     }
 
@@ -67,13 +69,14 @@ class BeaconController extends Controller
             'manufacturers' => Manufacturer::all(),
             'types' => Type::all(),
             'models' => Model::all(),
-            'statuses' => Status::all()
+            'statuses' => Status::all(),
+            'registrationStatuses' => RegistrationStatus::all()
         ]);
     }
 
     public function update (UpdateBeaconRequest $request, Beacon $beacon) {
         Gate::authorize('update', $beacon);
-        $beacon->update($request->except('type_id'));
+        $beacon->update($request->validated());
         return Redirect::route('beacons.index');
     }
 

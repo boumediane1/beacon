@@ -21,6 +21,7 @@ class CreateVesselsTable extends Migration
             $table->foreignId('beacon_id')->constrained()->cascadeOnDelete();
             $table->foreignId('port_id')->constrained()->cascadeOnDelete();
             $table->foreignId('activity_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('unit_type_id')->constrained()->cascadeOnDelete();
             $table->string('mmsi')->nullable();
             $table->timestamps();
         });

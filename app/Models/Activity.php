@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     use HasFactory;
+
+    public function unitTypes () {
+        return $this->hasMany(UnitType::class);
+    }
 }

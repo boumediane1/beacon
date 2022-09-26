@@ -15,11 +15,14 @@ class ActivitySeeder extends Seeder
     public function run()
     {
         $activities = [
-            ['name' => 'Fishing vessel'],
-            ['name' => 'Pleasure vessel'],
+            ['name' => 'Fishing'],
+            ['name' => 'Pleasure'],
             ['name' => 'Merchant navy'],
             ['name' => 'Air unit'],
-            ['name' => 'Land unit']
+            ['name' => 'Land unit'],
+            ['name' => 'Service'],
+            ['name' => 'Military'],
+            ['name' => 'SAR'],
 
         ];
 

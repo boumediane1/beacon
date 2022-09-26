@@ -19,6 +19,10 @@ class Beacon extends Model
         'usage' => 'integer'
     ];
 
+    public function type () {
+        return $this->belongsTo(Type::class);
+    }
+
     public function model () {
         return $this->belongsTo(Model::class);
     }
@@ -33,6 +37,10 @@ class Beacon extends Model
 
     public function status () {
         return $this->belongsTo(Status::class);
+    }
+
+    public function registrationStatues () {
+        return $this->belongsTo(RegistrationStatus::class);
     }
 
     public function getUsageAttribute () {

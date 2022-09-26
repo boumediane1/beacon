@@ -75,6 +75,19 @@
                     </div>
 
                     <div class="col-span-3">
+                        <Label for="unit_type" value="Unit type"></Label>
+                        <select
+                            v-model="form.unit_type_id"
+                            :disabled="!form.activity_id"
+                            id="unit_type"
+                            :class="{'cursor-not-allowed': !form.activity_id}"
+                            class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option v-for="unitType in filteredUnitTypes" :key="unitType.id" :value="unitType.id" v-text="unitType.name"></option>
+                        </select>
+                        <InputError class="mt-2" :message="errors.unit_type_id" />
+                    </div>
+
+                    <div class="col-span-3">
                         <Label for="city" value="City"></Label>
                         <select v-model="form.city_id" id="city" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="city in cities" :key="city.id" :value="city.id" v-text="city.name"></option>
@@ -85,7 +98,7 @@
                     <div class="col-span-3">
                         <Label for="port" value="Port of registration"></Label>
                         <select :disabled="!form.city_id" v-model="form.port_id" id="port" :class="{'cursor-not-allowed': !form.city_id}" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                            <option v-for="port in filtredPorts" :key="port.id" :value="port.id" v-text="port.name"></option>
+                            <option v-for="port in filteredPorts" :key="port.id" :value="port.id" v-text="port.name"></option>
                         </select>
                         <InputError class="mt-2" :message="errors.port_id" />
                     </div>
@@ -105,7 +118,6 @@
 import InputError from '@/Components/InputError';
 import FormSection from "@/Components/FormSection";
 import Multiselect from '@vueform/multiselect';
-import Listbox from "@/Components/Listbox";
 import AppLayout from '@/Layouts/Authenticated';
 import Label from "@/Components/Label";
 import Input from "@/Components/Input";
@@ -116,7 +128,6 @@ export default {
         Input,
         Label,
         AppLayout,
-        Listbox,
         Multiselect,
         FormSection,
         InputError
@@ -127,13 +138,15 @@ export default {
         cities: Array,
         ports: Array,
         activities: Array,
+        unitTypes: Array,
         users: Array,
         beacons: Array
     },
 
     data () {
         return {
-            filtredPorts: this.ports,
+            filteredPorts: this.ports,
+            filteredUnitTypes: this.unitTypes,
             form: {
                 name: '',
                 registration_number: '',
@@ -141,7 +154,8 @@ export default {
                 city_id: '',
                 port_id: '',
                 beacon_id: '',
-                activity_id: 1,
+                activity_id: '',
+                unit_type_id: '',
                 mmsi: ''
             }
         }
@@ -155,11 +169,11 @@ export default {
 
     watch: {
         'form.city_id': function () {
-            this.filtredPorts = this.ports.filter(port => port.city_id === this.form.city_id);
+            this.filteredPorts = this.ports.filter(port => port.city_id === this.form.city_id);
         },
 
-        'form.user_id': function () {
-
+        'form.activity_id': function () {
+            this.filteredUnitTypes = this.unitTypes.filter(unitType => unitType.activity_id === this.form.activity_id);
         }
     }
 }

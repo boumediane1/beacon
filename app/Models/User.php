@@ -26,6 +26,7 @@ class User extends Authenticatable
         'status',
         'phone_number',
         'secondary_phone_number',
+        'country_id',
         'address',
         'emergency_contact_name',
         'emergency_contact_phone_number',
@@ -55,5 +56,9 @@ class User extends Authenticatable
 
     public function vessels () {
         return $this->hasMany(Vessel::class);
+    }
+
+    public function country () {
+        return $this->belongsTo(Country::class);
     }
 }

@@ -85,7 +85,7 @@ import Input from "@/Components/Input";
 import Label from "@/Components/Label";
 import FormSection from "@/Components/FormSection";
 import AppLayout from '@/Layouts/Authenticated';
-import ActionMessage from "@/Components/ActionMessage";
+
 export default {
     components: {
         AppLayout, FormSection, Label, Input, InputError, Button, JetActionMessage
