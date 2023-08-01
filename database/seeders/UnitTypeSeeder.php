@@ -17,9 +17,7 @@ class UnitTypeSeeder extends Seeder
         $unit_types = [
             ['name' => 'Artisanal', 'activity_id' => 1],
             ['name' => 'Coastal', 'activity_id' => 1],
-            ['name' => 'Offshore', 'activity_id' => 1],
-            ['name' => 'Test 1', 'activity_id' => 2],
-            ['name' => 'Test 2', 'activity_id' => 2]
+            ['name' => 'Offshore', 'activity_id' => 1]
         ];
 
         DB::table('unit_types')->insert($unit_types);

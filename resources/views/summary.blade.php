@@ -108,7 +108,7 @@
             <span style="visibility: hidden;">AA</span>
 
             <span>Modèle : </span>
-            <span style="white-space: nowrap; font-weight: bold;">{{ $vessel->beacon->type->name }} {{ $vessel->beacon->model->name }}</span>
+            <span style="white-space: nowrap; font-weight: bold;">{{ $vessel->beacon->type->name }} {{ $vessel->beacon->model->name ?? '' }}</span>
 
             <span style="visibility: hidden;">AA</span>
 
