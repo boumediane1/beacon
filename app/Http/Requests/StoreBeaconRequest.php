@@ -35,7 +35,8 @@ class   StoreBeaconRequest extends FormRequest
             'type_id' => ['required'],
             'model_id' => ['nullable'],
             'registration_status_id' => ['required'],
-            'status_id' => ['required']
+            'status_id' => ['required'],
+            'tac' => ['nullable']
         ];
     }
 

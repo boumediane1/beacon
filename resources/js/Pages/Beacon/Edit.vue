@@ -62,7 +62,7 @@
 
                     <div class="col-span-3">
                         <Label for="registration_status" value="Registration status"></Label>
-                        <select id="registration_status" v-model="form.registration_status" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                        <select id="registration_status" v-model="form.registration_status_id" class="mt-1 block w-full py-2.5 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="registrationStatus in registrationStatuses" :key="registrationStatus.id" :value="registrationStatus.id" v-text="registrationStatus.name"></option>
                         </select>
                         <InputError class="mt-2" :message="errors.registrationStatus_id" />
