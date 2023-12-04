@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBeaconRequest;
 use App\Http\Requests\UpdateBeaconRequest;
-use App\Imports\BeaconImport;
 use App\Models\Beacon;
 use App\Models\Manufacturer;
 use App\Models\Model;
@@ -17,7 +16,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use Maatwebsite\Excel\Facades\Excel;
 
 class BeaconController extends Controller
 {
@@ -33,7 +31,7 @@ class BeaconController extends Controller
                 return $query->where('id', $search);
             })
             ->latest()
-            ->paginate(5);
+            ->paginate(8);
         return Inertia::render('Beacon/Index', [
             'beacons' => $beacons,
             'can' => [

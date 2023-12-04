@@ -39,6 +39,12 @@
                         <InputError class="mt-2" :message="errors.country_id" />
                     </div>
 
+                    <div class="col-span-3">
+                      <Label for="cin">CIN <span class="text-gray-500">(optional)</span></Label>
+                      <Input id="cin" type="text" v-model="form.cin" class="mt-1 py-2.5 block w-full" autocomplete="off" />
+                      <InputError class="mt-1" :message="errors.cin" />
+                    </div>
+
                     <div class="col-span-6">
                         <Label for="address" value="Address" />
                         <Textarea id="address" v-model="form.address" class="mt-1 py-2.5 block w-full" />
@@ -117,6 +123,7 @@ export default {
                 phone_number: this.user.phone_number,
                 secondary_phone_number: this.user.secondary_phone_number,
                 country_id: this.user.country_id,
+                cin: this.user.cin,
                 address: this.user.address,
                 emergency_contact_name: this.user.emergency_contact_name,
                 emergency_contact_phone_number: this.user.emergency_contact_phone_number,

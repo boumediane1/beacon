@@ -13,12 +13,11 @@ class VesselsExport implements WithMultipleSheets
     public function sheets(): array {
         $sheets = [];
         $ports = Port::query()->orderBy('name')->get();
+
         foreach ($ports as $port) {
             $sheets[] = new VesselsPerPortSheet($port);
         }
 
         return $sheets;
     }
-
-
 }

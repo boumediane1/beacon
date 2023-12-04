@@ -27,6 +27,7 @@ class User extends Authenticatable
         'phone_number',
         'secondary_phone_number',
         'country_id',
+        'cin',
         'address',
         'emergency_contact_name',
         'emergency_contact_phone_number',

@@ -20,13 +20,14 @@ class UserController extends Controller
         $users = User::query()
             ->where('role', 3)
             ->when($request->input('search'), function (Builder $query, $search) {
-                return $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%' . $search . '%');
+                $query->orWhere('cin', 'like', '%' . $search . '%');
             })
             ->when($request->input('id'), function (Builder $query, $search) {
                 return $query->where('id', $search);
             })
             ->latest()
-            ->paginate(5)
+            ->paginate(8)
             ->withQueryString();
 
         return Inertia::render('User/Index', [

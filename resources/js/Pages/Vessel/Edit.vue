@@ -177,6 +177,7 @@ export default {
     watch: {
         'form.city_id': function () {
             this.filteredPorts = this.ports.filter(port => port.city_id === this.form.city_id);
+            this.form.port_id = '';
         },
 
         'form.activity_id': function () {

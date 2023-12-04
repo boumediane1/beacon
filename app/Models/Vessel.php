@@ -27,5 +27,11 @@ class Vessel extends Model
         return $this->belongsTo(Activity::class);
     }
 
+    public function unitType() {
+        return $this->belongsTo(UnitType::class);
+    }
 
+    public function registrationStatus() {
+        return $this->belongsTo(RegistrationStatus::class);
+    }
 }

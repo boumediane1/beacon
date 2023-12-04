@@ -24,12 +24,13 @@ class VesselImport implements ToModel, WithHeadingRow, WithUpserts
         $beacon = Beacon::query()->where('uin', $row['uin'])->first();
         $port = Port::query()->where('name', $row['port'])->first();
         $activity = Activity::query()->where('name', $row['activity_type'])->first();
+
         return new Vessel([
-            'name' => $row['unit_name'],
             'registration_number' => $row['registration_number'],
+            'name' => $row['unit_name'],
             'port_id' => $port->id,
             'beacon_id' => $beacon->id,
-            'user_id' => $user->id ?? NULL,
+            'user_id' => $user->id ?? null,
             'activity_id' => $activity->id ?? 1
         ]);
     }

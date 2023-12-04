@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use PHPUnit\Runner\BaseTestRunner;
-use const Grpc\STATUS_ABORTED;
 
 class Beacon extends Model
 {
@@ -39,7 +37,7 @@ class Beacon extends Model
         return $this->belongsTo(Status::class);
     }
 
-    public function registrationStatues () {
+    public function registrationStatus () {
         return $this->belongsTo(RegistrationStatus::class);
     }
 
@@ -48,8 +46,4 @@ class Beacon extends Model
         $to = (int) Carbon::createFromFormat('Y-m-d', $this->expiration_date)->format('Y');
         return round(($to - $from) * 100 / 7);
     }
-
-//    public function getRegistrationDateAttribute ($value) {
-//        return Carbon::parse($value)->format('F d, Y');
-//    }
 }

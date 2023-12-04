@@ -31,6 +31,7 @@ class StoreUserRequest extends FormRequest
             'phone_number' => ['nullable', 'unique:users'],
             'secondary_phone_number' => ['nullable', 'unique:users'],
             'country_id' => ['required'],
+            'cin' => ['nullable', 'unique:users'],
             'address' => ['nullable', 'min:3', 'max:80'],
             'emergency_contact_name' => ['nullable'],
             'emergency_contact_phone_number' => ['nullable'],

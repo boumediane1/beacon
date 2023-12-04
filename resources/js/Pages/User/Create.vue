@@ -40,6 +40,12 @@
                         <InputError class="mt-2" :message="errors.country_id" />
                     </div>
 
+                    <div class="col-span-3">
+                      <Label for="cin">CIN <span class="text-gray-500">(optional)</span></Label>
+                      <Input id="cin" type="text" v-model="form.cin" class="mt-1 py-2.5 block w-full" autocomplete="off"/>
+                      <InputError class="mt-1" :message="errors.cin"/>
+                    </div>
+
                     <div class="col-span-6">
                         <Label for="address">Address <span class="text-gray-500">(optional)</span></Label>
                         <Textarea id="address" v-model="form.address" class="mt-1 py-2.5 block w-full" />
@@ -90,6 +96,7 @@ import AppLayout from '@/Layouts/Authenticated';
 import Label from "@/Components/Label";
 import Input from "@/Components/Input";
 import Button from "@/Components/Button";
+
 export default {
     components: {
         Textarea,
@@ -115,6 +122,7 @@ export default {
                 phone_number: '',
                 secondary_phone_number: '',
                 country_id: 1,
+                cin: '',
                 address: '',
                 emergency_contact_name: '',
                 emergency_contact_phone_number: '',
@@ -135,10 +143,6 @@ export default {
         'form.city_id': function () {
             this.ports = this.ports.filter(port => port.city_id === this.form.city_id);
         },
-
-        'form.user_id': function () {
-
-        }
     }
 }
 </script>

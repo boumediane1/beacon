@@ -8,7 +8,7 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Owner" autocomplete="off">
+                    <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Owner or CIN" autocomplete="off">
                 </div>
                 <div>
                     <Link v-if="can.create" :href="route('users.create')">
@@ -35,6 +35,9 @@
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider whitespace-nowrap">
                                         Phone number
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider whitespace-nowrap">
+                                      CIN
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider">
                                         Address
@@ -67,6 +70,9 @@
                                         <div class="text-sm text-gray-500">{{ user.phone_number ?? 'Undefined' }}</div>
                                         <div class="text-sm text-gray-500">{{ user.secondary_phone_number }}</div>
                                     </td>
+                                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ user.cin ?? 'Undefined' }}
+                                  </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ user.address ?? 'Undefined' }}
                                     </td>

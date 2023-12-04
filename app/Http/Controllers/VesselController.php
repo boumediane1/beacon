@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use App\Exports\VesselsExport;
 use App\Http\Requests\StoreVesselRequest;
 use App\Http\Requests\UpdateVesselRequest;
-use App\Imports\VesselImport;
-use App\Imports\UsersImport;
 use App\Imports\BeaconImport;
+use App\Imports\UsersImport;
+use App\Imports\VesselImport;
 use App\Models\Activity;
-use App\Models\UnitType;
-use App\Models\Vessel;
 use App\Models\Beacon;
 use App\Models\City;
 use App\Models\Port;
+use App\Models\RegistrationStatus;
+use App\Models\Type;
+use App\Models\UnitType;
 use App\Models\User;
+use App\Models\Vessel;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
@@ -51,8 +52,37 @@ class VesselController extends Controller
     }
 
     public function show (Vessel $vessel) {
-        $vessel = $vessel->load('user', 'beacon');
-        $pdf = PDF::loadView('summary', compact('vessel'));
+        $vessel = $vessel->load('unitType', 'user', 'beacon.registrationStatus', 'beacon.status');
+
+        $types = Type::all()->map(function ($type) use ($vessel) {
+            $temp = ['type' => ['name' => $type->name, 'selected' => false]];
+
+            if ($type->name === $vessel->beacon->type->name) {
+                $temp['type']['selected'] = true;
+            }
+
+            return $temp;
+        });
+
+        $registration_statuses = RegistrationStatus::all()->map(function ($status) use ($vessel) {
+            $temp = ['status' => ['name' => $status->name, 'selected' => false]];
+
+            if ($status->name === $vessel->beacon->registrationStatus->name) {
+                $temp['status']['selected'] = true;
+                return $temp;
+            }
+
+            return $temp;
+        });
+
+        $uin_arr = array_map(function ($c) {
+            return '[' . $c . '] ';
+        }, str_split($vessel->beacon->uin));
+
+        $uin = join($uin_arr);
+
+        $pdf = PDF::loadView('summary', compact('vessel', 'types', 'registration_statuses', 'uin'));
+
         return $pdf->stream($vessel->name . '.pdf');
     }
 

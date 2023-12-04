@@ -32,6 +32,7 @@ class UpdateUserRequest extends FormRequest
             'phone_number' => ['nullable', Rule::unique('users')->ignore($this->user->id)],
             'secondary_phone_number' => ['nullable', Rule::unique('users')->ignore($this->user->id)],
             'country_id' => ['required'],
+            'cin' => ['nullable', Rule::unique('users')->ignore($this->user->id)],
             'address' => ['nullable', 'min:3', 'max:80'],
             'emergency_contact_name' => ['nullable'],
             'emergency_contact_phone_number' => ['nullable'],
