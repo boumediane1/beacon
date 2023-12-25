@@ -26,7 +26,9 @@ class ManufacturerSeeder extends Seeder
             ['name' => 'WamBlee'],
             ['name' => 'SAMYUNG ENC'],
             ['name' => 'CETC'],
-
+            ['name' => 'NSR'],
+            ['name' => 'Kannad'],
+            ['name' => 'Sailor'],
         ];
 
         DB::table('manufacturers')->insert($manufacturers);

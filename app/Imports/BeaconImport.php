@@ -37,6 +37,7 @@ class BeaconImport implements ToModel, WithHeadingRow, WithUpserts
                 'model_id' => $model->id ?? 1,
                 'registration_status_id' => $registration_status->id ?? 1,
                 'status_id' => $status->id ?? 1,
+                'tac' => $row['tac']
             ]);
     }
 
