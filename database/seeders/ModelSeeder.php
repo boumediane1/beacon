@@ -52,6 +52,7 @@ class ModelSeeder extends Seeder
             ['name' => 'GLOBALFIX V4', 'type_id' => 2],
             ['name' => 'SafeSea E100', 'type_id' => 2],
             ['name' => 'SafeSea E100G', 'type_id' => 2],
+            ['name' => 'SafePro', 'type_id' => 2],
             ['name' => 'SAILOR 4065', 'type_id' => 2],
             ['name' => 'JQE-103', 'type_id' => 2],
             ['name' => 'Tron 405 MkII', 'type_id' => 2],
@@ -64,6 +65,7 @@ class ModelSeeder extends Seeder
             ['name' => 'FB60', 'type_id' => 2],
             ['name' => 'E5 SMART FIND', 'type_id' => 2],
             ['name' => 'NEB-2000C', 'type_id' => 2],
+            ['name' => 'SE406-II', 'type_id' => 2],
         ];
 
         DB::table('models')->insert($models);

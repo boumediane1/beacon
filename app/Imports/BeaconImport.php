@@ -23,7 +23,7 @@ class BeaconImport implements ToModel, WithHeadingRow, WithUpserts
     {
         $status = Status::query()->where('name', $row['beacon_status'])->first();
         $manufacturer = Manufacturer::query()->where('name', $row['manufacturer'])->first();
-        $model = Model::query()->where('name', 'MT410G')->first();
+        $model = Model::query()->where('name', $row['model'])->first();
         $registration_status = Model::query()->where('name', $row['registration_status'])->first();
 
             return new Beacon([
