@@ -84,7 +84,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         No results found.
                                     </td>
-                                    <td v-for="i in 3" :key="i"></td>
+                                    <td v-for="i in 4" :key="i"></td>
                                 </tr>
                                 </tbody>
                             </table>

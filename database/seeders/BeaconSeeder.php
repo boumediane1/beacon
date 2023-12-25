@@ -12,7 +12,6 @@ class BeaconSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
-     ,
      * 'status => true
      */
     public function run()

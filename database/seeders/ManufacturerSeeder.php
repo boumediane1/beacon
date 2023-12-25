@@ -24,7 +24,8 @@ class ManufacturerSeeder extends Seeder
             ['name' => 'JRC'],
             ['name' => 'Jotron'],
             ['name' => 'WamBlee'],
-            ['name' => 'SAMYUNG ENC']
+            ['name' => 'SAMYUNG ENC'],
+            ['name' => 'CETC'],
 
         ];
 

@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('role')->default(3);
             $table->string('phone_number')->nullable();
             $table->string('secondary_phone_number')->nullable();
-            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('country_id')->default(1)->constrained()->cascadeOnDelete();
             $table->string('cin')->unique()->nullable();
             $table->string('address')->nullable();
             $table->string('emergency_contact_name')->nullable();

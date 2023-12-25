@@ -102,6 +102,7 @@ import Label from "@/Components/Label";
 import Input from "@/Components/Input";
 import Button from "@/Components/Button";
 import InputError from "@/Components/InputError";
+
 export default {
     components: {
         InputError,
@@ -159,6 +160,10 @@ export default {
         'form.type_id': function () {
             this.filteredModels = this.models.filter(model => model.type_id === this.form.type_id);
         }
+    },
+
+    created() {
+      this.filteredModels = this.models.filter(model => model.type_id === this.form.type_id);
     }
 }
 </script>

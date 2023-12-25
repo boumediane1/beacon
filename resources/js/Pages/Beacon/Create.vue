@@ -160,8 +160,8 @@ export default {
         }
     },
 
-    // created () {
-    //     this.filteredModels = this.models.filter(model => model.type_id === this.form.type_id);
-    // }
+    created () {
+        this.filteredModels = this.models.filter(model => model.type_id === this.form.type_id);
+    }
 }
 </script>
