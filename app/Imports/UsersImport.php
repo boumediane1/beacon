@@ -13,8 +13,9 @@ class UsersImport implements ToModel, WithHeadingRow, WithUpserts
     public function model(array $row)
     {
         $country = Country::query()->where('name', $row['country'])->first();
+        $user = User::query()->where('name', $row['owner'])->first();
 
-        if ($row['owner'] && $row['phone_number']) {
+        if (!$user && $row['owner']) {
             return new User([
                 'name' => $row['owner'],
                 'email' => $row['email'],
