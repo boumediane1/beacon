@@ -11,7 +11,6 @@
                     <input id="email" @input="search" v-model="term" class="py-2.5 px-4 bg-white placeholder-gray-400 text-gray-900 rounded-lg shadow appearance-none w-full block pl-12 focus:outline-none" placeholder="Unit name, Owner, UIN, S/N SAR or MMSI" autocomplete="off">
                 </div>
                 <div class="flex gap-2">
-
                     <div v-if="can.import">
                         <input id="upload-file" type="file" @input="form.file = $event.target.files[0]" @change="importFile" class="sr-only">
                         <label for="upload-file" class="cursor-pointer">
