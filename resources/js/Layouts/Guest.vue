@@ -10,11 +10,11 @@
                         <div class="flex justify-center">
                             <img class="w-72" src="images/cospa.png" alt="">
                         </div>
-                        <div class="my-6 text-2xl font-bold text-center text-gray-700 capitalize">
-                          <div>
+                        <div class="my-6 text-center text-gray-700 capitalize">
+                          <div class="text-2xl" style="font-family: 'Kalam', cursive">
                             Beacons tracking tool 406
                           </div>
-                          <div style="font-family: 'Cairo Play', sans-serif">
+                          <div class="text-lg" style="font-family: 'El Messiri', sans-serif">
                             رصد أجهزة الإنذار 406
                           </div>
                         </div>
