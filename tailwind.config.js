@@ -17,6 +17,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                noto: ['Noto Kufi Arabic', ...defaultTheme.fontFamily.sans]
             },
             colors: {
                 'amber': colors.amber,
