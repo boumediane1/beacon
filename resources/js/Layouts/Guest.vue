@@ -1,30 +1,17 @@
 <template>
-  <div class="flex items-center min-h-screen" style="background-image: url('images/bg.png'); background-size: cover;">
-        <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
-            <div class="flex flex-col md:flex-row">
-                <div class="hidden h-32 md:h-auto md:w-1/2 md:flex items-center bg-gray-200">
-                  <img class="object-cover w-80 mx-auto" src="images/logo.png" alt="Logo">
-                </div>
-                <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-                    <div class="w-full">
-                        <div class="flex justify-center">
-                            <img class="w-72" src="images/cospa.png" alt="">
-                        </div>
-                        <div class="my-6 text-center text-gray-700 capitalize">
-                          <div class="text-2xl" style="font-family: 'Kalam', cursive">
-                            Beacons tracking tool 406
-                          </div>
-                          <div class="text-lg" style="font-family: 'El Messiri', sans-serif">
-                            رصد أجهزة الإنذار 406
-                          </div>
-                        </div>
-                        <slot></slot>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="hidden lg:block min-h-screen" style="background-image: url('images/bg.jpeg'); background-size: cover">
+    <div class="flex justify-center items-end fixed bottom-0 w-full">
+      <div class="w-1/4 bg-white rounded-lg shadow-xl p-5">
+        <slot />
+      </div>
     </div>
+  </div>
 
+  <div class="lg:hidden flex items-center min-h-screen" style="background-image: url('images/bg.jpeg'); background-size: cover">-->
+    <div class="flex-1 h-full max-w-lg mx-auto bg-white rounded-lg shadow-xl p-5">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script>
